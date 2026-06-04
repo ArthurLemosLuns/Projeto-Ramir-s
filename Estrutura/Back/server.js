@@ -3,12 +3,16 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const db = require('./db');
+const path = require('path');
 
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Servir arquivos estáticos do frontend
+app.use(express.static(path.join(__dirname, '../Front')));
 
 const SECRET_KEY = 'sua_chave_secreta_muito_segura_2026';
 
@@ -105,13 +109,18 @@ app.post('/api/auth/login', (req, res) => {
 
 // Rota de teste
 app.get('/', (req, res) => {
-    res.json({ message: 'Servidor rodando! 🚀' });
+    res.sendFile(path.join(__dirname, '../Front/index.html'));
+});
+
+// Rota de teste - simple ping
+app.get('/api/ping', (req, res) => {
+    res.json({ message: 'Servidor está respondendo! ✅' });
 });
 
 // ===== INICIAR SERVIDOR =====
 const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
+app.listen(PORT, '127.0.0.1', () => {
+    console.log(`✅ Servidor rodando em http://127.0.0.1:${PORT}`);
     console.log(`📊 Banco de dados SQLite3 inicializado`);
 });
 

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Marlons</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <div id="login-section" class="login-container">
+            <div class="login-card">
+                <h1>Marlons</h1>
+                <p class="subtitle">Bem-vindo ao Sistema</p>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Senha:</label>
+                        <input type="password" id="password" name="password" placeholder="Sua senha" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-login">Entrar</button>
+                </form>
+                
+                <p class="register-link">
+                    Não tem conta? <a href="#" onclick="toggleRegister()">Registre-se aqui</a>
+                </p>
+                
+                <div id="message" class="message"></div>
+            </div>
+        </div>
+
+        <div id="register-section" class="login-container" style="display: none;">
+            <div class="login-card">
+                <h1>Marlons</h1>
+                <p class="subtitle">Criar Novo Cadastro</p>
+                
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="register-name">Nome:</label>
+                        <input type="text" id="register-name" name="name" placeholder="Seu nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-email">Email:</label>
+                        <input type="email" id="register-email" name="email" placeholder="seu@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-password">Senha:</label>
+                        <input type="password" id="register-password" name="password" placeholder="Sua senha" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-confirm">Confirmar Senha:</label>
+                        <input type="password" id="register-confirm" name="confirm" placeholder="Confirme sua senha" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-login">Cadastrar</button>
+                </form>
+                
+                <p class="register-link">
+                    Já tem conta? <a href="#" onclick="toggleRegister()">Faça login</a>
+                </p>
+                
+                <div id="register-message" class="message"></div>
+            </div>
+        </div>
+
+        <div id="dashboard" class="dashboard" style="display: none;">
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <h2>Marlons</h2>
+                </div>
+                <div class="navbar-user">
+                    <span id="user-name"></span>
+                    <button class="btn-logout" onclick="logout()">Sair</button>
+                </div>
+            </nav>
+
+            <main class="dashboard-content">
+                <div class="welcome-section">
+                    <h1>Bem-vindo à Marlons!</h1>
+                    <p class="welcome-subtitle">Sistema de Gestão da Empresa</p>
+                </div>
+
+                <div class="cards-container">
+                    <div class="card">
+                        <h3>📊 Relatórios</h3>
+                        <p>Acompanhe os relatórios e métricas da empresa</p>
+                    </div>
+                    <div class="card">
+                        <h3>👥 Equipe</h3>
+                        <p>Gerenciamento da equipe e colaboradores</p>
+                    </div>
+                    <div class="card">
+                        <h3>⚙️ Configurações</h3>
+                        <p>Configurações do sistema e preferências</p>
+                    </div>
+                    <div class="card">
+                        <h3>📈 Vendas</h3>
+                        <p>Monitoramento de vendas e desempenho</p>
+                    </div>
+                </div>
+
+                <footer class="footer">
+                    <p>&copy; 2026 Marlons - Sistema Integrado. Todos os direitos reservados.</p>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Marlons</title>
+    <title>Ramir's Pizzaria Entertainment</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <div class="container">
         <div id="login-section" class="login-container">
-            <div class="login-card">
-                <h1>Marlons</h1>
-                <p class="subtitle">Bem-vindo ao Sistema</p>
-                
+            <div class="login-card pizza-card">
+                <div class="brand-header">
+                    <div class="brand-mark">🍕</div>
+                    <h1>Ramir's Pizzaria</h1>
+                </div>
+                <p class="subtitle">Entre e descubra um cardápio cheio de pizzas e bebidas especiais.</p>
+
                 <form id="login-form">
                     <div class="form-group">
                         <label for="email">Email:</label>
@@ -36,10 +39,13 @@
         </div>
 
         <div id="register-section" class="login-container" style="display: none;">
-            <div class="login-card">
-                <h1>Marlons</h1>
-                <p class="subtitle">Criar Novo Cadastro</p>
-                
+            <div class="login-card pizza-card">
+                <div class="brand-header">
+                    <div class="brand-mark">🍕</div>
+                    <h1>Ramir's Pizzaria</h1>
+                </div>
+                <p class="subtitle">Crie sua conta para acessar o cardápio e fazer pedidos.</p>
+
                 <form id="register-form">
                     <div class="form-group">
                         <label for="register-name">Nome:</label>
@@ -75,7 +81,8 @@
         <div id="dashboard" class="dashboard" style="display: none;">
             <nav class="navbar">
                 <div class="navbar-brand">
-                    <h2>Marlons</h2>
+                    <div class="brand-mark">🍕</div>
+                    <h2>Ramir's Pizzaria Entertainment</h2>
                 </div>
                 <div class="navbar-user">
                     <span id="user-name"></span>
@@ -85,31 +92,28 @@
 
             <main class="dashboard-content">
                 <div class="welcome-section">
-                    <h1>Bem-vindo à Marlons!</h1>
-                    <p class="welcome-subtitle">Sistema de Gestão da Empresa</p>
+                    <h1>Bem-vindo à Ramir's!</h1>
+                    <p class="welcome-subtitle">Seu portal para pizzas artesanais, bebidas geladas e combos especiais.</p>
                 </div>
 
-                <div class="cards-container">
-                    <div class="card">
-                        <h3>📊 Relatórios</h3>
-                        <p>Acompanhe os relatórios e métricas da empresa</p>
+                <section class="menu-section">
+                    <div class="section-header">
+                        <h2>Cardápio da Casa</h2>
+                        <p>Explore nossas pizzas, bebidas e combinações para todos os gostos.</p>
                     </div>
-                    <div class="card">
-                        <h3>👥 Equipe</h3>
-                        <p>Gerenciamento da equipe e colaboradores</p>
+                    <div id="menu-grid" class="menu-grid"></div>
+                </section>
+
+                <section class="drinks-section">
+                    <div class="section-header">
+                        <h2>Bebidas em Destaque</h2>
+                        <p>Escolha entre refrigerantes, sucos, drinks e bebidas especiais.</p>
                     </div>
-                    <div class="card">
-                        <h3>⚙️ Configurações</h3>
-                        <p>Configurações do sistema e preferências</p>
-                    </div>
-                    <div class="card">
-                        <h3>📈 Vendas</h3>
-                        <p>Monitoramento de vendas e desempenho</p>
-                    </div>
-                </div>
+                    <div id="drinks-grid" class="menu-grid"></div>
+                </section>
 
                 <footer class="footer">
-                    <p>&copy; 2026 Marlons - Sistema Integrado. Todos os direitos reservados.</p>
+                    <p>&copy; 2026 Ramir's Pizzaria Entertainment. Sinta o sabor da melhor pizza da cidade.</p>
                 </footer>
             </main>
         </div>

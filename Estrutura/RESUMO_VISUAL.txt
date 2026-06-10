@@ -1,5 +1,5 @@
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║                    ✅ PROJETO MARLONS - COMPLETO! ✅                        ║
+║                    ✅ PROJETO RAMIR'S PIZZARIA ENTERTAINMENT - COMPLETO! ✅                        ║
 ║                                                                              ║
 ║                    Sistema de Login + Dashboard Integrado                   ║
 ║                         com SQLite3 e Autenticação JWT                      ║
@@ -54,7 +54,7 @@
      ✅ Animações suaves e transições
      ✅ Formulários intuitivos
 
-  📊 DASHBOARD MARLONS
+  📊 DASHBOARD RAMIR'S PIZZARIA
      ✅ Bem-vindo personalizado
      ✅ 4 Cards com funcionalidades
      ✅ Menu de navegação elegante
@@ -100,12 +100,12 @@
   REGISTRAR:
     • Clique "Registre-se aqui"
     • Nome: Seu Nome
-    • Email: teste@marlons.com
+    • Email: teste@ramirs.com
     • Senha: abc123456
     • Clique "Cadastrar"
 
   FAZER LOGIN:
-    • Email: teste@marlons.com
+    • Email: teste@ramirs.com
     • Senha: abc123456
     • Clique "Entrar"
 
@@ -206,10 +206,10 @@
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🎉 PARABÉNS! Seu sistema Marlons está COMPLETO! 🎉
+🎉 PARABÉNS! Seu sistema Ramir's Pizzaria Entertainment está COMPLETO! 🎉
 
 Desenvolvido com ❤️ - 04 de Junho de 2026
-Marlons © 2026 - Todos os direitos reservados
+Ramir's Pizzaria Entertainment © 2026 - Todos os direitos reservados
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 

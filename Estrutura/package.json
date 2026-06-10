@@ -1,7 +1,7 @@
 {
-  "name": "marlons-system",
+  "name": "ramirs-pizzaria-entertainment",
   "version": "1.0.0",
-  "description": "Sistema de Login e Dashboard Marlons",
+  "description": "Sistema de Login e Cardápio Ramir's Pizzaria Entertainment",
   "main": "Back/server.js",
   "scripts": {
     "start": "node Back/server.js",

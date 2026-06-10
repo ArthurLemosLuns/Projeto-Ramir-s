@@ -1,6 +1,6 @@
-# 📖 Índice de Documentação - Marlons
+# 📖 Índice de Documentação - Ramir's Pizzaria Entertainment
 
-Bem-vindo ao sistema **Marlons**! Aqui está tudo documentado e pronto para usar.
+Bem-vindo ao sistema **Ramir's Pizzaria Entertainment**! Aqui está tudo documentado e pronto para usar.
 
 ---
 
@@ -269,7 +269,7 @@ R: Delete `Back/database.db` e reinicie o servidor
 
 ---
 
-**Desenvolvido com ❤️ para Marlons**
+**Desenvolvido com ❤️ para Ramir's Pizzaria Entertainment**
 
 **Versão:** 1.0.0  
 **Status:** ✅ Produção Pronta  

@@ -55,16 +55,65 @@ const drinkItems = [
 ];
 
 function toggleRegister() {
+    console.log('🔄 toggleRegister() chamado');
     const loginSection = document.getElementById('login-section');
     const registerSection = document.getElementById('register-section');
+    const forgotSection = document.getElementById('forgot-password-section');
 
-    loginSection.style.display = loginSection.style.display === 'none' ? 'flex' : 'none';
-    registerSection.style.display = registerSection.style.display === 'none' ? 'flex' : 'none';
+    if (!loginSection || !registerSection || !forgotSection) {
+        console.error('❌ Um dos elementos não foi encontrado!');
+        return;
+    }
 
-    document.getElementById('message').textContent = '';
-    document.getElementById('register-message').textContent = '';
-    document.getElementById('message').className = 'message';
-    document.getElementById('register-message').className = 'message';
+    const loginVisible = loginSection.style.display !== 'none';
+    console.log('loginVisible antes:', loginVisible);
+    
+    // Alterna entre login e registro
+    loginSection.style.display = loginVisible ? 'none' : 'flex';
+    registerSection.style.display = loginVisible ? 'flex' : 'none';
+    forgotSection.style.display = 'none';
+
+    // Limpar mensagens
+    const messageDiv = document.getElementById('message');
+    const registerMessageDiv = document.getElementById('register-message');
+    const forgotMessageDiv = document.getElementById('forgot-message');
+    
+    if (messageDiv) messageDiv.textContent = '';
+    if (registerMessageDiv) registerMessageDiv.textContent = '';
+    if (forgotMessageDiv) forgotMessageDiv.textContent = '';
+    
+    console.log('✅ toggleRegister() concluído - Login:', loginSection.style.display, 'Registro:', registerSection.style.display);
+}
+
+function toggleForgotPassword() {
+    console.log('🔄 toggleForgotPassword() chamado');
+    const loginSection = document.getElementById('login-section');
+    const forgotSection = document.getElementById('forgot-password-section');
+    const registerSection = document.getElementById('register-section');
+
+    if (!loginSection || !forgotSection || !registerSection) {
+        console.error('❌ Um dos elementos não foi encontrado!');
+        return;
+    }
+
+    const loginVisible = loginSection.style.display !== 'none';
+    console.log('loginVisible antes:', loginVisible);
+    
+    // Alterna entre login e esqueceu senha
+    loginSection.style.display = loginVisible ? 'none' : 'flex';
+    forgotSection.style.display = loginVisible ? 'flex' : 'none';
+    registerSection.style.display = 'none';
+
+    // Limpar mensagens
+    const messageDiv = document.getElementById('message');
+    const registerMessageDiv = document.getElementById('register-message');
+    const forgotMessageDiv = document.getElementById('forgot-message');
+    
+    if (messageDiv) messageDiv.textContent = '';
+    if (registerMessageDiv) registerMessageDiv.textContent = '';
+    if (forgotMessageDiv) forgotMessageDiv.textContent = '';
+    
+    console.log('✅ toggleForgotPassword() concluído - Login:', loginSection.style.display, 'Esqueceu:', forgotSection.style.display);
 }
 
 function renderMenu() {
@@ -184,15 +233,25 @@ document.addEventListener('DOMContentLoaded', () => {
             const confirm = document.getElementById('register-confirm').value;
             const messageDiv = document.getElementById('register-message');
 
+            console.log('📝 Formulário de registro enviado');
+            console.log('Nome:', name);
+            console.log('Email:', email);
+            console.log('Senha:', password);
+            console.log('Confirmar:', confirm);
+
             if (password !== confirm) {
+                console.log('❌ Senhas não coincidem');
                 messageDiv.textContent = 'As senhas não correspondem!';
                 messageDiv.className = 'message error';
+                messageDiv.style.display = 'block';
                 return;
             }
 
             if (password.length < 6) {
+                console.log('❌ Senha muito curta');
                 messageDiv.textContent = 'A senha deve ter no mínimo 6 caracteres!';
                 messageDiv.className = 'message error';
+                messageDiv.style.display = 'block';
                 return;
             }
 
@@ -210,26 +269,108 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('📥 Resposta do servidor:', data);
 
                 if (response.ok) {
+                    console.log('✅ Cadastro realizado com sucesso');
                     messageDiv.textContent = 'Cadastro realizado com sucesso! Redirecionando...';
                     messageDiv.className = 'message success';
+                    messageDiv.style.display = 'block';
                     document.getElementById('register-form').reset();
                     setTimeout(() => {
                         toggleRegister();
                         messageDiv.textContent = '';
                         messageDiv.className = 'message';
+                        messageDiv.style.display = 'none';
                     }, 2000);
                 } else {
+                    console.log('❌ Erro do servidor:', data);
                     messageDiv.textContent = data.message || 'Erro ao cadastrar';
                     messageDiv.className = 'message error';
+                    messageDiv.style.display = 'block';
                 }
             } catch (error) {
                 console.error('❌ Erro ao conectar:', error);
                 messageDiv.textContent = 'Erro ao conectar com o servidor';
                 messageDiv.className = 'message error';
+                messageDiv.style.display = 'block';
             }
         });
     } else {
         console.warn('⚠️ Formulário de registro não encontrado');
     }
+
+    const forgotPasswordForm = document.getElementById('forgot-password-form');
+    if (forgotPasswordForm) {
+        forgotPasswordForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('forgot-email').value;
+            const newPassword = document.getElementById('forgot-new-password').value;
+            const confirm = document.getElementById('forgot-confirm-password').value;
+            const messageDiv = document.getElementById('forgot-message');
+
+            console.log('📝 Formulário de recuperação enviado');
+            console.log('Email:', email);
+            console.log('Nova Senha:', newPassword);
+            console.log('Confirmar:', confirm);
+
+            if (newPassword !== confirm) {
+                console.log('❌ Senhas não coincidem');
+                messageDiv.textContent = 'As senhas não correspondem!';
+                messageDiv.className = 'message error';
+                messageDiv.style.display = 'block';
+                return;
+            }
+
+            if (newPassword.length < 6) {
+                console.log('❌ Senha muito curta');
+                messageDiv.textContent = 'A senha deve ter no mínimo 6 caracteres!';
+                messageDiv.className = 'message error';
+                messageDiv.style.display = 'block';
+                return;
+            }
+
+            try {
+                console.log('📤 Enviando requisição de reset de senha...');
+                
+                const response = await fetch(`${API_URL}/auth/reset-password`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, newPassword })
+                });
+
+                const data = await response.json();
+                console.log('📥 Resposta do servidor:', data);
+
+                if (response.ok) {
+                    console.log('✅ Senha alterada com sucesso');
+                    messageDiv.textContent = 'Senha alterada com sucesso! Redirecionando...';
+                    messageDiv.className = 'message success';
+                    messageDiv.style.display = 'block';
+                    document.getElementById('forgot-password-form').reset();
+                    setTimeout(() => {
+                        toggleForgotPassword();
+                        messageDiv.textContent = '';
+                        messageDiv.className = 'message';
+                        messageDiv.style.display = 'none';
+                    }, 2000);
+                } else {
+                    console.log('❌ Erro do servidor:', data);
+                    messageDiv.textContent = data.message || 'Erro ao alterar senha';
+                    messageDiv.className = 'message error';
+                    messageDiv.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('❌ Erro ao conectar:', error);
+                messageDiv.textContent = 'Erro ao conectar com o servidor';
+                messageDiv.className = 'message error';
+                messageDiv.style.display = 'block';
+            }
+        });
+    } else {
+        console.warn('⚠️ Formulário de recuperação de senha não encontrado');
+    }
+
+    console.log('🎉 Todos os formulários foram inicializados com sucesso!');
 });
 

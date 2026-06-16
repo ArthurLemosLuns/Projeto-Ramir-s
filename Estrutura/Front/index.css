@@ -149,6 +149,11 @@ body {
     text-decoration: underline;
 }
 
+.divider {
+    margin: 0 8px;
+    color: #9c7a5c;
+}
+
 .message {
     margin-top: 20px;
     padding: 14px;

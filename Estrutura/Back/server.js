@@ -107,6 +107,77 @@ app.post('/api/auth/login', (req, res) => {
     }
 });
 
+// ===== ROTAS DE RECUPERAÇÃO DE SENHA =====
+
+// Verificar se email existe
+app.post('/api/auth/forgot-password', (req, res) => {
+    const { email } = req.body;
+    
+    if (!email) {
+        return res.status(400).json({ message: 'Email é obrigatório' });
+    }
+    
+    try {
+        db.get('SELECT * FROM users WHERE email = ?', [email], (err, user) => {
+            if (err) {
+                return res.status(500).json({ message: 'Erro ao buscar usuário' });
+            }
+            
+            if (!user) {
+                return res.status(404).json({ message: 'Email não encontrado' });
+            }
+            
+            res.json({ message: 'Email encontrado. Você pode resetar sua senha.' });
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Erro no servidor' });
+    }
+});
+
+// Resetar senha
+app.put('/api/auth/reset-password', async (req, res) => {
+    const { email, newPassword } = req.body;
+    
+    if (!email || !newPassword) {
+        return res.status(400).json({ message: 'Email e nova senha são obrigatórios' });
+    }
+    
+    if (newPassword.length < 6) {
+        return res.status(400).json({ message: 'A senha deve ter no mínimo 6 caracteres' });
+    }
+    
+    try {
+        // Verificar se usuário existe
+        db.get('SELECT * FROM users WHERE email = ?', [email], async (err, user) => {
+            if (err) {
+                return res.status(500).json({ message: 'Erro ao buscar usuário' });
+            }
+            
+            if (!user) {
+                return res.status(404).json({ message: 'Email não encontrado' });
+            }
+            
+            // Hash da nova senha
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+            
+            // Atualizar senha
+            db.run(
+                'UPDATE users SET password = ? WHERE email = ?',
+                [hashedPassword, email],
+                (err) => {
+                    if (err) {
+                        return res.status(500).json({ message: 'Erro ao resetar senha' });
+                    }
+                    
+                    res.json({ message: 'Senha alterada com sucesso! Faça login com sua nova senha.' });
+                }
+            );
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Erro no servidor' });
+    }
+});
+
 // Rota de teste
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../Front/index.html'));

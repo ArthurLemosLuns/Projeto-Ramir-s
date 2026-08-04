@@ -4,3 +4,6 @@ senha cadastrada: SENHASEGURA@69
 Informações do ultimo prompt que foi barrado:
 
 Gostaria que fisseze um modelo que faça as pizzas serem separadas por categoria. Exemplo: PIzza pequena(categoria), média(categoria), grande(categoria) e família(categoria). Separe também essas categorias em Pizza salgada e Pizza doce também. Faça o mesmo para algumas das bebidas, sendo separadas por tamanhos(250ml, 500 ml, 1,5L e 2L), onde após escolher o tamanho, seja mostrado as marcas que tem do tamanho pedido. Exemplo: Pepsi, Coca-cola, Fanta e Guaraná antartica, junto dos sabores que possuem.
+
+Adicione o sistema da API de delivery do site "https://nest-api-wzc7.onrender.com/api/docs" dando um toque no site para que possa ser utilizado também o delivery para ser entregue os pedidos, interligando cada informação necessária para funcionar o servidor corretamente sem mudar tantas informações na página. Apenas o necessário
+

@@ -1,58 +1,114 @@
 const API_URL = 'http://localhost:3000/api';
 
-const menuItems = [
+const pizzaCategories = [
     {
-        name: 'Margherita Suprema',
-        description: 'Molho de tomate especial, mussarela fresca, manjericão e toque de azeite aromático.',
-        price: 'R$ 49,90',
-        tags: ['Clássica', 'Vegetariana']
+        title: 'Pizza salgada',
+        sizes: [
+            {
+                size: 'Pequena',
+                items: [
+                    { name: 'Margherita', description: 'Molho de tomate, mussarela e manjericão.', price: 'R$ 34,90' },
+                    { name: 'Pepperoni', description: 'Pepperoni, mussarela e borda crocante.', price: 'R$ 39,90' }
+                ]
+            },
+            {
+                size: 'Média',
+                items: [
+                    { name: 'Frango com Catupiry', description: 'Frango, catupiry e cebola crocante.', price: 'R$ 49,90' },
+                    { name: 'Quatro Queijos', description: 'Mussarela, provolone, gorgonzola e parmesão.', price: 'R$ 52,90' }
+                ]
+            },
+            {
+                size: 'Grande',
+                items: [
+                    { name: 'Calabresa Especial', description: 'Calabresa, cebola e queijo derretido.', price: 'R$ 59,90' },
+                    { name: 'Vegetariana', description: 'Tomate, abobrinha, pimentão e champignon.', price: 'R$ 57,90' }
+                ]
+            },
+            {
+                size: 'Família',
+                items: [
+                    { name: 'Bacon com Cebola', description: 'Bacon, cebola caramelizada e queijo premium.', price: 'R$ 69,90' },
+                    { name: 'Mussarela Especial', description: 'Mussarela generosa e molho artesanal.', price: 'R$ 66,90' }
+                ]
+            }
+        ]
     },
     {
-        name: 'Pepperoni do Chef',
-        description: 'Fatias generosas de pepperoni, queijo extra e borda crocante dourada.',
-        price: 'R$ 59,90',
-        tags: ['Apimentada', 'Favorita']
-    },
-    {
-        name: 'Quatro Queijos Art',
-        description: 'Mussarela, provolone, gorgonzola e parmesão com mel trufado opcional.',
-        price: 'R$ 64,90',
-        tags: ['Cremosa', 'Premium']
-    },
-    {
-        name: 'Frango com Catupiry',
-        description: 'Frango desfiado, catupiry, milho doce e cebola crocante para uma explosão de sabor.',
-        price: 'R$ 57,90',
-        tags: ['Clássica', 'Saborosa']
+        title: 'Pizza doce',
+        sizes: [
+            {
+                size: 'Pequena',
+                items: [
+                    { name: 'Chocolate com Morango', description: 'Chocolate ao leite e morangos frescos.', price: 'R$ 36,90' },
+                    { name: 'Romeu e Julieta', description: 'Queijo minas com goiabada.', price: 'R$ 34,90' }
+                ]
+            },
+            {
+                size: 'Média',
+                items: [
+                    { name: 'Banoffee', description: 'Banana, doce de leite e chocolate.', price: 'R$ 46,90' },
+                    { name: 'Prestígio', description: 'Chocolate, coco e raspas de chocolate.', price: 'R$ 44,90' }
+                ]
+            },
+            {
+                size: 'Grande',
+                items: [
+                    { name: 'Nutella com Banana', description: 'Nutella, banana e castanhas.', price: 'R$ 56,90' },
+                    { name: 'Brigadeiro', description: 'Brigadeiro e granulado crocante.', price: 'R$ 54,90' }
+                ]
+            },
+            {
+                size: 'Família',
+                items: [
+                    { name: 'Sensação', description: 'Chocolate, morango e creme.', price: 'R$ 64,90' },
+                    { name: 'Confetti', description: 'Chocolate, confete e creme de leite.', price: 'R$ 62,90' }
+                ]
+            }
+        ]
     }
 ];
 
-const drinkItems = [
-    {
-        name: 'Refrigerante Gelado',
-        description: 'Coca-Cola, Guaraná ou Fanta em tamanho 350ml.',
+const drinkSizes = {
+    '250ml': {
+        price: 'R$ 6,90',
+        brands: [
+            { name: 'Pepsi', flavors: ['Cola', 'Zero'] },
+            { name: 'Coca-Cola', flavors: ['Original', 'Zero'] },
+            { name: 'Fanta', flavors: ['Laranja', 'Uva'] },
+            { name: 'Guaraná Antarctica', flavors: ['Original', 'Zero'] }
+        ]
+    },
+    '500ml': {
         price: 'R$ 9,90',
-        tags: ['Refrescante', 'Clássica']
+        brands: [
+            { name: 'Pepsi', flavors: ['Cola', 'Limao'] },
+            { name: 'Coca-Cola', flavors: ['Original', 'Zero'] },
+            { name: 'Fanta', flavors: ['Laranja', 'Guaraná'] },
+            { name: 'Guaraná Antarctica', flavors: ['Original', 'Sem Açúcar'] }
+        ]
     },
-    {
-        name: 'Suco Natural',
-        description: 'Laranja, abacaxi ou maracujá preparado na hora com toque de hortelã.',
-        price: 'R$ 12,90',
-        tags: ['Natural', 'Saudável']
+    '1,5L': {
+        price: 'R$ 14,90',
+        brands: [
+            { name: 'Pepsi', flavors: ['Cola', 'Manga'] },
+            { name: 'Coca-Cola', flavors: ['Original', 'Zero'] },
+            { name: 'Fanta', flavors: ['Laranja', 'Uva'] },
+            { name: 'Guaraná Antarctica', flavors: ['Original', 'Zero'] }
+        ]
     },
-    {
-        name: 'Drink Sem Álcool',
-        description: 'Mocktail de frutas vermelhas com água com gás e um twist cítrico.',
-        price: 'R$ 16,90',
-        tags: ['Especial', 'Festivo']
-    },
-    {
-        name: 'Chá Gelado Gourmet',
-        description: 'Chá de hibisco com limão e geleia de pêssego.',
-        price: 'R$ 11,90',
-        tags: ['Elegante', 'Refrescante']
+    '2L': {
+        price: 'R$ 18,90',
+        brands: [
+            { name: 'Pepsi', flavors: ['Cola', 'Pêssego'] },
+            { name: 'Coca-Cola', flavors: ['Original', 'Zero'] },
+            { name: 'Fanta', flavors: ['Laranja', 'Manga'] },
+            { name: 'Guaraná Antarctica', flavors: ['Original', 'Sem Açúcar'] }
+        ]
     }
-];
+};
+
+let selectedDrinkSize = '500ml';
 
 function toggleRegister() {
     console.log('🔄 toggleRegister() chamado');
@@ -121,31 +177,64 @@ function renderMenu() {
     const drinksGrid = document.getElementById('drinks-grid');
 
     if (menuGrid) {
-        menuGrid.innerHTML = menuItems.map(item => {
-            const tags = item.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        menuGrid.innerHTML = pizzaCategories.map(category => {
+            const sizeCards = category.sizes.map(sizeGroup => {
+                const items = sizeGroup.items.map(item => `
+                    <article class="menu-card pizza-item-card">
+                        <h4>${item.name}</h4>
+                        <p>${item.description}</p>
+                        <div class="price">${item.price}</div>
+                    </article>
+                `).join('');
+
+                return `
+                    <div class="pizza-size-group">
+                        <h4>${sizeGroup.size}</h4>
+                        <div class="pizza-items-list">${items}</div>
+                    </div>
+                `;
+            }).join('');
+
             return `
-                <article class="menu-card">
-                    <h3>${item.name}</h3>
-                    <p>${item.description}</p>
-                    <div class="price">${item.price}</div>
-                    <div class="tags">${tags}</div>
-                </article>
+                <section class="menu-category-block">
+                    <h3>${category.title}</h3>
+                    <div class="pizza-size-grid">${sizeCards}</div>
+                </section>
             `;
         }).join('');
     }
 
     if (drinksGrid) {
-        drinksGrid.innerHTML = drinkItems.map(item => {
-            const tags = item.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        const sizeButtons = Object.keys(drinkSizes).map(size => `
+            <button class="drink-size-btn ${selectedDrinkSize === size ? 'active' : ''}" data-size="${size}">
+                ${size}
+            </button>
+        `).join('');
+
+        const currentSelection = drinkSizes[selectedDrinkSize];
+        const brandsMarkup = currentSelection.brands.map(brand => {
+            const flavors = brand.flavors.map(flavor => `<span class="drink-flavor-tag">${flavor}</span>`).join('');
             return `
-                <article class="menu-card">
-                    <h3>${item.name}</h3>
-                    <p>${item.description}</p>
-                    <div class="price">${item.price}</div>
-                    <div class="tags">${tags}</div>
+                <article class="menu-card drink-brand-card">
+                    <h4>${brand.name}</h4>
+                    <p>Sabores disponíveis para o tamanho ${selectedDrinkSize}:</p>
+                    <div class="drink-flavors">${flavors}</div>
                 </article>
             `;
         }).join('');
+
+        drinksGrid.innerHTML = `
+            <div class="drink-selector">${sizeButtons}</div>
+            <div class="drink-price-banner">Preço sugerido: <strong>${currentSelection.price}</strong></div>
+            <div class="drink-brand-list">${brandsMarkup}</div>
+        `;
+
+        drinksGrid.querySelectorAll('.drink-size-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                selectedDrinkSize = button.getAttribute('data-size');
+                renderMenu();
+            });
+        });
     }
 }
 
@@ -369,6 +458,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     } else {
         console.warn('⚠️ Formulário de recuperação de senha não encontrado');
+    }
+
+    const deliveryForm = document.getElementById('delivery-form');
+    if (deliveryForm) {
+        deliveryForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const address = document.getElementById('delivery-address').value;
+            const note = document.getElementById('delivery-note').value;
+            const messageDiv = document.getElementById('delivery-message');
+
+            if (!address.trim()) {
+                messageDiv.textContent = 'Informe o endereço para o delivery.';
+                messageDiv.className = 'message error';
+                messageDiv.style.display = 'block';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/delivery/order`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        address,
+                        note,
+                        items: [{ productId: 1, quantidade: 1 }]
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageDiv.textContent = data.message || 'Pedido enviado com sucesso!';
+                    messageDiv.className = 'message success';
+                    messageDiv.style.display = 'block';
+                    deliveryForm.reset();
+                } else {
+                    messageDiv.textContent = data.message || 'Não foi possível enviar o pedido.';
+                    messageDiv.className = 'message error';
+                    messageDiv.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('❌ Erro ao enviar pedido de delivery:', error);
+                messageDiv.textContent = 'Erro ao conectar com o serviço de delivery.';
+                messageDiv.className = 'message error';
+                messageDiv.style.display = 'block';
+            }
+        });
     }
 
     console.log('🎉 Todos os formulários foram inicializados com sucesso!');

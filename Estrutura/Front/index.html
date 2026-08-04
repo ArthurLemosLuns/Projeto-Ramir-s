@@ -149,6 +149,27 @@
                     <div id="drinks-grid" class="menu-grid"></div>
                 </section>
 
+                <section class="delivery-section">
+                    <div class="section-header">
+                        <h2>Delivery</h2>
+                        <p>Envie seu pedido com endereço e observação para entrega.</p>
+                    </div>
+                    <form id="delivery-form" class="delivery-form">
+                        <div class="form-group">
+                            <label for="delivery-address">Endereço de entrega:</label>
+                            <input type="text" id="delivery-address" name="address" placeholder="Rua, número, bairro" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="delivery-note">Observação:</label>
+                            <textarea id="delivery-note" name="note" rows="3" placeholder="Ex.: Sem cebola, deixar na porta..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-login">Enviar pedido</button>
+                        <div id="delivery-message" class="message"></div>
+                    </form>
+                </section>
+
                 <footer class="footer">
                     <p>&copy; 2026 Ramir's Pizzaria Entertainment. Sinta o sabor da melhor pizza da cidade.</p>
                 </footer>

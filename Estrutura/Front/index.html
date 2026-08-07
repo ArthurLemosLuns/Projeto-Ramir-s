@@ -152,21 +152,142 @@
                 <section class="delivery-section">
                     <div class="section-header">
                         <h2>Delivery</h2>
-                        <p>Envie seu pedido com endereço e observação para entrega.</p>
+                        <p>Monte seu pedido de pizza e bebida, escolha o tamanho e envie para entrega.</p>
                     </div>
                     <form id="delivery-form" class="delivery-form">
-                        <div class="form-group">
-                            <label for="delivery-address">Endereço de entrega:</label>
-                            <input type="text" id="delivery-address" name="address" placeholder="Rua, número, bairro" required>
+                        <div class="delivery-order-builder">
+                            <div class="order-builder-title">
+                                <span>🛵</span> Monte seu pedido
+                            </div>
+
+                            <!-- Escolha da Pizza -->
+                            <div class="order-builder-group">
+                                <h3 class="order-group-title">🍕 Escolha sua Pizza</h3>
+
+                                <div class="form-group">
+                                    <label for="delivery-pizza-flavor">Sabor da Pizza:</label>
+                                    <select id="delivery-pizza-flavor" name="pizzaFlavor" required>
+                                        <option value="">Selecione o sabor...</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Tamanho da Pizza:</label>
+                                    <div class="pizza-size-options" id="delivery-pizza-sizes">
+                                        <label class="size-option-card">
+                                            <input type="radio" name="pizzaSize" value="Pequena" checked>
+                                            <span class="size-option-info">
+                                                <span class="size-option-name">Pequena</span>
+                                                <span class="size-option-price">R$ 30,00</span>
+                                            </span>
+                                        </label>
+                                        <label class="size-option-card">
+                                            <input type="radio" name="pizzaSize" value="Média">
+                                            <span class="size-option-info">
+                                                <span class="size-option-name">Média</span>
+                                                <span class="size-option-price">R$ 40,00</span>
+                                            </span>
+                                        </label>
+                                        <label class="size-option-card">
+                                            <input type="radio" name="pizzaSize" value="Grande">
+                                            <span class="size-option-info">
+                                                <span class="size-option-name">Grande</span>
+                                                <span class="size-option-price">R$ 55,00</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Escolha da Bebida -->
+                            <div class="order-builder-group">
+                                <h3 class="order-group-title">🥤 Escolha sua Bebida</h3>
+
+                                <div class="form-group">
+                                    <label>Deseja adicionar uma bebida?</label>
+                                    <div class="drink-choice-options">
+                                        <label class="choice-option-card">
+                                            <input type="radio" name="wantDrink" value="yes" checked>
+                                            <span>Sim, quero bebida</span>
+                                        </label>
+                                        <label class="choice-option-card">
+                                            <input type="radio" name="wantDrink" value="no">
+                                            <span>Não quero bebida</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div id="delivery-drink-fields">
+                                    <div class="form-group">
+                                        <label for="delivery-drink-brand">Marca da Bebida:</label>
+                                        <select id="delivery-drink-brand" name="drinkBrand">
+                                            <option value="">Selecione a marca...</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="delivery-drink-flavor">Sabor:</label>
+                                        <select id="delivery-drink-flavor" name="drinkFlavor">
+                                            <option value="">Selecione o sabor...</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Tamanho da Bebida:</label>
+                                        <div class="drink-size-options" id="delivery-drink-sizes">
+                                            <label class="size-option-card">
+                                                <input type="radio" name="drinkSize" value="1L">
+                                                <span class="size-option-info">
+                                                    <span class="size-option-name">1 Litro</span>
+                                                    <span class="size-option-price">R$ 10,90</span>
+                                                </span>
+                                            </label>
+                                            <label class="size-option-card">
+                                                <input type="radio" name="drinkSize" value="1,5L" checked>
+                                                <span class="size-option-info">
+                                                    <span class="size-option-name">1,5 Litro</span>
+                                                    <span class="size-option-price">R$ 12,90</span>
+                                                </span>
+                                            </label>
+                                            <label class="size-option-card">
+                                                <input type="radio" name="drinkSize" value="2L">
+                                                <span class="size-option-info">
+                                                    <span class="size-option-name">2 Litros</span>
+                                                    <span class="size-option-price">R$ 14,90</span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Resumo do Pedido -->
+                            <div class="order-summary">
+                                <h3 class="order-group-title">🧾 Resumo do Pedido</h3>
+                                <div id="delivery-order-summary" class="order-summary-items">
+                                    <p class="order-summary-empty">Selecione os itens para ver o resumo.</p>
+                                </div>
+                                <div class="order-total">
+                                    <span>Total:</span>
+                                    <strong id="delivery-order-total">R$ 0,00</strong>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="delivery-note">Observação:</label>
-                            <textarea id="delivery-note" name="note" rows="3" placeholder="Ex.: Sem cebola, deixar na porta..."></textarea>
-                        </div>
+                        <div class="delivery-address-block">
+                            <div class="form-group">
+                                <label for="delivery-address">Endereço de entrega:</label>
+                                <input type="text" id="delivery-address" name="address" placeholder="Rua, número, bairro" required>
+                            </div>
 
-                        <button type="submit" class="btn-login">Enviar pedido</button>
-                        <div id="delivery-message" class="message"></div>
+                            <div class="form-group">
+                                <label for="delivery-note">Observação:</label>
+                                <textarea id="delivery-note" name="note" rows="3" placeholder="Ex.: Sem cebola, deixar na porta..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-login">Enviar pedido</button>
+                            <div id="delivery-message" class="message"></div>
+                        </div>
                     </form>
                 </section>
 

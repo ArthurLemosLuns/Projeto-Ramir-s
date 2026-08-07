@@ -1,5 +1,5 @@
-email cadastrado: alemoslus@gmail.com
-senha cadastrada: SENHASEGURA@69
+email cadastrado: pato@gmail.com
+senha cadastrada: lacerda
 
 Informações do ultimo prompt que foi barrado:
 

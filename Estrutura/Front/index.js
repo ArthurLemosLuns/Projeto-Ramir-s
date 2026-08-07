@@ -110,6 +110,166 @@ const drinkSizes = {
 
 let selectedDrinkSize = '500ml';
 
+// ===== DADOS DE PREÇOS DO DELIVERY =====
+let deliveryFormInitialized = false;
+const deliveryPizzaSizes = {
+    'Pequena': { price: 30.00, label: 'Pequena', display: 'R$ 30,00' },
+    'Média': { price: 40.00, label: 'Média', display: 'R$ 40,00' },
+    'Grande': { price: 55.00, label: 'Grande', display: 'R$ 55,00' }
+};
+
+const deliveryDrinkSizes = {
+    '1L': { price: 10.90, label: '1 Litro', display: 'R$ 10,90' },
+    '1,5L': { price: 12.90, label: '1,5 Litro', display: 'R$ 12,90' },
+    '2L': { price: 14.90, label: '2 Litros', display: 'R$ 14,90' }
+};
+
+// Sabores disponíveis para cada tamanho de pizza no delivery
+const deliveryPizzaFlavors = {
+    'Pequena': ['Margherita', 'Pepperoni', 'Chocolate com Morango'],
+    'Média': ['Frango com Catupiry', 'Quatro Queijos', 'Banoffee'],
+    'Grande': ['Calabresa Especial', 'Vegetariana', 'Nutella com Banana']
+};
+
+// Marcas e sabores de bebida para o delivery
+const deliveryDrinkBrands = [
+    { name: 'Coca-Cola', flavors: ['Original', 'Zero'] },
+    { name: 'Pepsi', flavors: ['Cola', 'Zero'] },
+    { name: 'Fanta', flavors: ['Laranja', 'Uva'] },
+    { name: 'Guaraná Antarctica', flavors: ['Original', 'Zero'] }
+];
+
+function formatCurrency(value) {
+    return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+
+function initDeliveryForm() {
+    const pizzaFlavorSelect = document.getElementById('delivery-pizza-flavor');
+    const drinkBrandSelect = document.getElementById('delivery-drink-brand');
+    const drinkFlavorSelect = document.getElementById('delivery-drink-flavor');
+
+    if (!pizzaFlavorSelect || !drinkBrandSelect || !drinkFlavorSelect) {
+        console.warn('⚠️ Elementos do formulário de delivery não encontrados');
+        return;
+    }
+
+    // Popula o select de sabores de pizza
+    const defaultPizzaSize = document.querySelector('input[name="pizzaSize"]:checked')?.value || 'Pequena';
+    populatePizzaFlavors(defaultPizzaSize);
+
+    // Popula o select de marcas de bebida (limpa antes para evitar duplicatas)
+    drinkBrandSelect.innerHTML = '';
+    deliveryDrinkBrands.forEach(brand => {
+        const option = document.createElement('option');
+        option.value = brand.name;
+        option.textContent = brand.name;
+        drinkBrandSelect.appendChild(option);
+    });
+
+    // Popula os sabores da primeira marca
+    if (deliveryDrinkBrands.length > 0) {
+        drinkBrandSelect.value = deliveryDrinkBrands[0].name;
+        populateDrinkFlavors(deliveryDrinkBrands[0].name);
+    }
+
+    // Event listeners para atualizar o resumo (apenas uma vez)
+    const deliveryForm = document.getElementById('delivery-form');
+    if (deliveryForm && !deliveryFormInitialized) {
+        deliveryForm.addEventListener('change', updateDeliverySummary);
+        deliveryFormInitialized = true;
+    }
+
+    updateDeliverySummary();
+}
+
+function populatePizzaFlavors(size) {
+    const pizzaFlavorSelect = document.getElementById('delivery-pizza-flavor');
+    if (!pizzaFlavorSelect) return;
+
+    pizzaFlavorSelect.innerHTML = '<option value="">Selecione o sabor...</option>';
+    const flavors = deliveryPizzaFlavors[size] || [];
+    flavors.forEach(flavor => {
+        const option = document.createElement('option');
+        option.value = flavor;
+        option.textContent = flavor;
+        pizzaFlavorSelect.appendChild(option);
+    });
+}
+
+function populateDrinkFlavors(brandName) {
+    const drinkFlavorSelect = document.getElementById('delivery-drink-flavor');
+    if (!drinkFlavorSelect) return;
+
+    const brand = deliveryDrinkBrands.find(b => b.name === brandName);
+    drinkFlavorSelect.innerHTML = '<option value="">Selecione o sabor...</option>';
+    if (!brand) return;
+
+    brand.flavors.forEach(flavor => {
+        const option = document.createElement('option');
+        option.value = flavor;
+        option.textContent = flavor;
+        drinkFlavorSelect.appendChild(option);
+    });
+}
+
+function updateDeliverySummary() {
+    const pizzaFlavorSelect = document.getElementById('delivery-pizza-flavor');
+    const pizzaSizeInput = document.querySelector('input[name="pizzaSize"]:checked');
+    const wantDrinkInput = document.querySelector('input[name="wantDrink"]:checked');
+    const drinkBrandSelect = document.getElementById('delivery-drink-brand');
+    const drinkFlavorSelect = document.getElementById('delivery-drink-flavor');
+    const drinkSizeInput = document.querySelector('input[name="drinkSize"]:checked');
+    const summaryDiv = document.getElementById('delivery-order-summary');
+    const totalDiv = document.getElementById('delivery-order-total');
+
+    if (!pizzaFlavorSelect || !pizzaSizeInput || !summaryDiv || !totalDiv) return;
+
+    const pizzaFlavor = pizzaFlavorSelect.value;
+    const pizzaSize = pizzaSizeInput.value;
+    const pizzaPrice = deliveryPizzaSizes[pizzaSize]?.price || 0;
+    const wantDrink = wantDrinkInput?.value === 'yes';
+
+    let itemsHtml = '';
+    let total = 0;
+
+    // Item da pizza
+    if (pizzaFlavor) {
+        itemsHtml += `
+            <div class="order-summary-item">
+                <span class="summary-item-name">🍕 ${pizzaFlavor} (${deliveryPizzaSizes[pizzaSize]?.label})</span>
+                <span class="summary-item-price">${deliveryPizzaSizes[pizzaSize]?.display}</span>
+            </div>
+        `;
+        total += pizzaPrice;
+    }
+
+    // Item da bebida
+    if (wantDrink && drinkBrandSelect && drinkFlavorSelect && drinkSizeInput) {
+        const drinkBrand = drinkBrandSelect.value;
+        const drinkFlavor = drinkFlavorSelect.value;
+        const drinkSize = drinkSizeInput.value;
+        const drinkPrice = deliveryDrinkSizes[drinkSize]?.price || 0;
+
+        if (drinkBrand && drinkFlavor) {
+            itemsHtml += `
+                <div class="order-summary-item">
+                    <span class="summary-item-name">🥤 ${drinkBrand} - ${drinkFlavor} (${deliveryDrinkSizes[drinkSize]?.label})</span>
+                    <span class="summary-item-price">${deliveryDrinkSizes[drinkSize]?.display}</span>
+                </div>
+            `;
+            total += drinkPrice;
+        }
+    }
+
+    if (!itemsHtml) {
+        summaryDiv.innerHTML = '<p class="order-summary-empty">Selecione os itens para ver o resumo.</p>';
+    } else {
+        summaryDiv.innerHTML = itemsHtml;
+    }
+
+    totalDiv.textContent = formatCurrency(total);
+}
+
 function toggleRegister() {
     console.log('🔄 toggleRegister() chamado');
     const loginSection = document.getElementById('login-section');
@@ -244,6 +404,7 @@ function showDashboard(userName) {
     document.getElementById('dashboard').style.display = 'block';
     document.getElementById('user-name').textContent = `Olá, ${userName}!`;
     renderMenu();
+    initDeliveryForm();
 }
 
 function logout() {
@@ -469,12 +630,54 @@ document.addEventListener('DOMContentLoaded', () => {
             const note = document.getElementById('delivery-note').value;
             const messageDiv = document.getElementById('delivery-message');
 
+            const pizzaFlavorSelect = document.getElementById('delivery-pizza-flavor');
+            const pizzaSizeInput = document.querySelector('input[name="pizzaSize"]:checked');
+            const wantDrinkInput = document.querySelector('input[name="wantDrink"]:checked');
+            const drinkBrandSelect = document.getElementById('delivery-drink-brand');
+            const drinkFlavorSelect = document.getElementById('delivery-drink-flavor');
+            const drinkSizeInput = document.querySelector('input[name="drinkSize"]:checked');
+
             if (!address.trim()) {
                 messageDiv.textContent = 'Informe o endereço para o delivery.';
                 messageDiv.className = 'message error';
                 messageDiv.style.display = 'block';
                 return;
             }
+
+            if (!pizzaFlavorSelect || !pizzaFlavorSelect.value || !pizzaSizeInput) {
+                messageDiv.textContent = 'Escolha o sabor e o tamanho da pizza.';
+                messageDiv.className = 'message error';
+                messageDiv.style.display = 'block';
+                return;
+            }
+
+            const items = [];
+
+            // Item da pizza
+            items.push({
+                nome: pizzaFlavorSelect.value,
+                tipo: 'pizza',
+                tamanho: pizzaSizeInput.value,
+                valor: deliveryPizzaSizes[pizzaSizeInput.value]?.price || 0
+            });
+
+            // Item da bebida (se selecionada)
+            const wantDrink = wantDrinkInput?.value === 'yes';
+            if (wantDrink && drinkBrandSelect && drinkFlavorSelect && drinkSizeInput) {
+                const drinkBrand = drinkBrandSelect.value;
+                const drinkFlavor = drinkFlavorSelect.value;
+
+                if (drinkBrand && drinkFlavor) {
+                    items.push({
+                        nome: `${drinkBrand} - ${drinkFlavor}`,
+                        tipo: 'bebida',
+                        tamanho: drinkSizeInput.value,
+                        valor: deliveryDrinkSizes[drinkSizeInput.value]?.price || 0
+                    });
+                }
+            }
+
+            const total = items.reduce((sum, item) => sum + item.valor, 0);
 
             try {
                 const response = await fetch(`${API_URL}/delivery/order`, {
@@ -485,7 +688,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify({
                         address,
                         note,
-                        items: [{ productId: 1, quantidade: 1 }]
+                        items,
+                        total
                     })
                 });
 
@@ -496,6 +700,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     messageDiv.className = 'message success';
                     messageDiv.style.display = 'block';
                     deliveryForm.reset();
+                    // Re-inicializa o delivery após reset para repopular os selects
+                    initDeliveryForm();
                 } else {
                     messageDiv.textContent = data.message || 'Não foi possível enviar o pedido.';
                     messageDiv.className = 'message error';
@@ -509,6 +715,45 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Event listeners para os controles do delivery
+    const pizzaSizeRadios = document.querySelectorAll('input[name="pizzaSize"]');
+    pizzaSizeRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (radio.checked) {
+                populatePizzaFlavors(radio.value);
+                updateDeliverySummary();
+            }
+        });
+    });
+
+    const drinkBrandSelect = document.getElementById('delivery-drink-brand');
+    if (drinkBrandSelect) {
+        drinkBrandSelect.addEventListener('change', () => {
+            populateDrinkFlavors(drinkBrandSelect.value);
+            updateDeliverySummary();
+        });
+    }
+
+    const wantDrinkRadios = document.querySelectorAll('input[name="wantDrink"]');
+    const drinkFields = document.getElementById('delivery-drink-fields');
+    wantDrinkRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (drinkFields) {
+                drinkFields.style.display = radio.value === 'yes' ? 'block' : 'none';
+            }
+            updateDeliverySummary();
+        });
+    });
+
+    const drinkSizeRadios = document.querySelectorAll('input[name="drinkSize"]');
+    drinkSizeRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (radio.checked) {
+                updateDeliverySummary();
+            }
+        });
+    });
 
     console.log('🎉 Todos os formulários foram inicializados com sucesso!');
 });

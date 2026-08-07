@@ -7,3 +7,4 @@ Gostaria que fisseze um modelo que faça as pizzas serem separadas por categoria
 
 Adicione o sistema da API de delivery do site "https://nest-api-wzc7.onrender.com/api/docs" dando um toque no site para que possa ser utilizado também o delivery para ser entregue os pedidos, interligando cada informação necessária para funcionar o servidor corretamente sem mudar tantas informações na página. Apenas o necessário
 
+Na parte do Delivery, coloque a opção de escolher os pedidos, como a escolha da pizza, opção de tamanho dela mostrando os valores daquele tamanho, como por exemplo a Pizza Pequena ser R$30,00, Média ser R$40,00 e Grande R$55,00. Que tenha também a escolha da bebida e o tamanho dela, tendo como opção se quer a de 2L, 1,5L ou 1L. 

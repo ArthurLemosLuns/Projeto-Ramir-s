@@ -112,6 +112,9 @@ let selectedDrinkSize = '500ml';
 
 // ===== DADOS DE PREÇOS DO DELIVERY =====
 let deliveryFormInitialized = false;
+let deliveryCart = []; // Carrinho com múltiplos itens
+let cartItemId = 0; // Gerador de IDs únicos para itens do carrinho
+
 const deliveryPizzaSizes = {
     'Pequena': { price: 30.00, label: 'Pequena', display: 'R$ 30,00' },
     'Média': { price: 40.00, label: 'Média', display: 'R$ 40,00' },
@@ -213,61 +216,155 @@ function populateDrinkFlavors(brandName) {
 }
 
 function updateDeliverySummary() {
-    const pizzaFlavorSelect = document.getElementById('delivery-pizza-flavor');
-    const pizzaSizeInput = document.querySelector('input[name="pizzaSize"]:checked');
-    const wantDrinkInput = document.querySelector('input[name="wantDrink"]:checked');
-    const drinkBrandSelect = document.getElementById('delivery-drink-brand');
-    const drinkFlavorSelect = document.getElementById('delivery-drink-flavor');
-    const drinkSizeInput = document.querySelector('input[name="drinkSize"]:checked');
     const summaryDiv = document.getElementById('delivery-order-summary');
     const totalDiv = document.getElementById('delivery-order-total');
 
-    if (!pizzaFlavorSelect || !pizzaSizeInput || !summaryDiv || !totalDiv) return;
+    if (!summaryDiv || !totalDiv) return;
 
-    const pizzaFlavor = pizzaFlavorSelect.value;
-    const pizzaSize = pizzaSizeInput.value;
-    const pizzaPrice = deliveryPizzaSizes[pizzaSize]?.price || 0;
-    const wantDrink = wantDrinkInput?.value === 'yes';
+    if (deliveryCart.length === 0) {
+        summaryDiv.innerHTML = '<p class="order-summary-empty">Seu carrinho está vazio. Adicione pizzas e bebidas!</p>';
+        totalDiv.textContent = formatCurrency(0);
+        return;
+    }
 
     let itemsHtml = '';
     let total = 0;
 
-    // Item da pizza
-    if (pizzaFlavor) {
+    deliveryCart.forEach(item => {
+        const icon = item.tipo === 'pizza' ? '🍕' : '🥤';
         itemsHtml += `
-            <div class="order-summary-item">
-                <span class="summary-item-name">🍕 ${pizzaFlavor} (${deliveryPizzaSizes[pizzaSize]?.label})</span>
-                <span class="summary-item-price">${deliveryPizzaSizes[pizzaSize]?.display}</span>
+            <div class="order-summary-item cart-item">
+                <div class="cart-item-info">
+                    <span class="summary-item-name">${icon} ${item.nome}</span>
+                    <span class="summary-item-detail">${item.tamanho}</span>
+                </div>
+                <div class="cart-item-actions">
+                    <span class="summary-item-price">${item.display}</span>
+                    <button type="button" class="btn-remove-item" data-cart-id="${item.cartId}" title="Remover item">✕</button>
+                </div>
             </div>
         `;
-        total += pizzaPrice;
-    }
+        total += item.valor;
+    });
 
-    // Item da bebida
-    if (wantDrink && drinkBrandSelect && drinkFlavorSelect && drinkSizeInput) {
-        const drinkBrand = drinkBrandSelect.value;
-        const drinkFlavor = drinkFlavorSelect.value;
-        const drinkSize = drinkSizeInput.value;
-        const drinkPrice = deliveryDrinkSizes[drinkSize]?.price || 0;
+    summaryDiv.innerHTML = itemsHtml;
 
-        if (drinkBrand && drinkFlavor) {
-            itemsHtml += `
-                <div class="order-summary-item">
-                    <span class="summary-item-name">🥤 ${drinkBrand} - ${drinkFlavor} (${deliveryDrinkSizes[drinkSize]?.label})</span>
-                    <span class="summary-item-price">${deliveryDrinkSizes[drinkSize]?.display}</span>
-                </div>
-            `;
-            total += drinkPrice;
-        }
-    }
-
-    if (!itemsHtml) {
-        summaryDiv.innerHTML = '<p class="order-summary-empty">Selecione os itens para ver o resumo.</p>';
-    } else {
-        summaryDiv.innerHTML = itemsHtml;
-    }
+    // Event listeners para os botões de remover
+    summaryDiv.querySelectorAll('.btn-remove-item').forEach(button => {
+        button.addEventListener('click', () => {
+            removeFromCart(parseInt(button.getAttribute('data-cart-id')));
+        });
+    });
 
     totalDiv.textContent = formatCurrency(total);
+}
+
+function addPizzaToCart() {
+    const pizzaFlavorSelect = document.getElementById('delivery-pizza-flavor');
+    const pizzaSizeInput = document.querySelector('input[name="pizzaSize"]:checked');
+
+    if (!pizzaFlavorSelect || !pizzaSizeInput) return;
+
+    const flavor = pizzaFlavorSelect.value;
+    const size = pizzaSizeInput.value;
+
+    if (!flavor) {
+        const messageDiv = document.getElementById('delivery-message');
+        if (messageDiv) {
+            messageDiv.textContent = 'Selecione o sabor da pizza antes de adicionar.';
+            messageDiv.className = 'message error';
+            messageDiv.style.display = 'block';
+        }
+        return;
+    }
+
+    const sizeData = deliveryPizzaSizes[size];
+    deliveryCart.push({
+        cartId: cartItemId++,
+        nome: flavor,
+        tipo: 'pizza',
+        tamanho: sizeData?.label || size,
+        valor: sizeData?.price || 0,
+        display: sizeData?.display || 'R$ 0,00'
+    });
+
+    // Limpa a seleção de sabor após adicionar
+    pizzaFlavorSelect.value = '';
+    updateDeliverySummary();
+
+    const messageDiv = document.getElementById('delivery-message');
+    if (messageDiv) {
+        messageDiv.textContent = '🍕 Pizza adicionada ao carrinho!';
+        messageDiv.className = 'message success';
+        messageDiv.style.display = 'block';
+        setTimeout(() => {
+            messageDiv.textContent = '';
+            messageDiv.className = 'message';
+            messageDiv.style.display = 'none';
+        }, 2000);
+    }
+}
+
+function addDrinkToCart() {
+    const wantDrinkInput = document.querySelector('input[name="wantDrink"]:checked');
+    if (wantDrinkInput?.value !== 'yes') return;
+
+    const drinkBrandSelect = document.getElementById('delivery-drink-brand');
+    const drinkFlavorSelect = document.getElementById('delivery-drink-flavor');
+    const drinkSizeInput = document.querySelector('input[name="drinkSize"]:checked');
+
+    if (!drinkBrandSelect || !drinkFlavorSelect || !drinkSizeInput) return;
+
+    const brand = drinkBrandSelect.value;
+    const flavor = drinkFlavorSelect.value;
+    const size = drinkSizeInput.value;
+
+    if (!brand || !flavor) {
+        const messageDiv = document.getElementById('delivery-message');
+        if (messageDiv) {
+            messageDiv.textContent = 'Selecione a marca e o sabor da bebida antes de adicionar.';
+            messageDiv.className = 'message error';
+            messageDiv.style.display = 'block';
+        }
+        return;
+    }
+
+    const sizeData = deliveryDrinkSizes[size];
+    deliveryCart.push({
+        cartId: cartItemId++,
+        nome: `${brand} - ${flavor}`,
+        tipo: 'bebida',
+        tamanho: sizeData?.label || size,
+        valor: sizeData?.price || 0,
+        display: sizeData?.display || 'R$ 0,00'
+    });
+
+    // Limpa o sabor após adicionar
+    drinkFlavorSelect.value = '';
+    updateDeliverySummary();
+
+    const messageDiv = document.getElementById('delivery-message');
+    if (messageDiv) {
+        messageDiv.textContent = '🥤 Bebida adicionada ao carrinho!';
+        messageDiv.className = 'message success';
+        messageDiv.style.display = 'block';
+        setTimeout(() => {
+            messageDiv.textContent = '';
+            messageDiv.className = 'message';
+            messageDiv.style.display = 'none';
+        }, 2000);
+    }
+}
+
+function removeFromCart(cartId) {
+    deliveryCart = deliveryCart.filter(item => item.cartId !== cartId);
+    updateDeliverySummary();
+}
+
+function clearDeliveryCart() {
+    deliveryCart = [];
+    cartItemId = 0;
+    updateDeliverySummary();
 }
 
 function toggleRegister() {
@@ -630,13 +727,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const note = document.getElementById('delivery-note').value;
             const messageDiv = document.getElementById('delivery-message');
 
-            const pizzaFlavorSelect = document.getElementById('delivery-pizza-flavor');
-            const pizzaSizeInput = document.querySelector('input[name="pizzaSize"]:checked');
-            const wantDrinkInput = document.querySelector('input[name="wantDrink"]:checked');
-            const drinkBrandSelect = document.getElementById('delivery-drink-brand');
-            const drinkFlavorSelect = document.getElementById('delivery-drink-flavor');
-            const drinkSizeInput = document.querySelector('input[name="drinkSize"]:checked');
-
             if (!address.trim()) {
                 messageDiv.textContent = 'Informe o endereço para o delivery.';
                 messageDiv.className = 'message error';
@@ -644,40 +734,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            if (!pizzaFlavorSelect || !pizzaFlavorSelect.value || !pizzaSizeInput) {
-                messageDiv.textContent = 'Escolha o sabor e o tamanho da pizza.';
+            if (deliveryCart.length === 0) {
+                messageDiv.textContent = 'Seu carrinho está vazio. Adicione itens ao pedido.';
                 messageDiv.className = 'message error';
                 messageDiv.style.display = 'block';
                 return;
             }
 
-            const items = [];
+            // Envia todos os itens do carrinho
+            const items = deliveryCart.map(item => ({
+                nome: item.nome,
+                tipo: item.tipo,
+                tamanho: item.tamanho,
+                valor: item.valor
+            }));
 
-            // Item da pizza
-            items.push({
-                nome: pizzaFlavorSelect.value,
-                tipo: 'pizza',
-                tamanho: pizzaSizeInput.value,
-                valor: deliveryPizzaSizes[pizzaSizeInput.value]?.price || 0
-            });
-
-            // Item da bebida (se selecionada)
-            const wantDrink = wantDrinkInput?.value === 'yes';
-            if (wantDrink && drinkBrandSelect && drinkFlavorSelect && drinkSizeInput) {
-                const drinkBrand = drinkBrandSelect.value;
-                const drinkFlavor = drinkFlavorSelect.value;
-
-                if (drinkBrand && drinkFlavor) {
-                    items.push({
-                        nome: `${drinkBrand} - ${drinkFlavor}`,
-                        tipo: 'bebida',
-                        tamanho: drinkSizeInput.value,
-                        valor: deliveryDrinkSizes[drinkSizeInput.value]?.price || 0
-                    });
-                }
-            }
-
-            const total = items.reduce((sum, item) => sum + item.valor, 0);
+            const total = deliveryCart.reduce((sum, item) => sum + item.valor, 0);
 
             try {
                 const response = await fetch(`${API_URL}/delivery/order`, {
@@ -700,6 +772,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     messageDiv.className = 'message success';
                     messageDiv.style.display = 'block';
                     deliveryForm.reset();
+                    clearDeliveryCart();
                     // Re-inicializa o delivery após reset para repopular os selects
                     initDeliveryForm();
                 } else {
@@ -714,6 +787,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 messageDiv.style.display = 'block';
             }
         });
+    }
+
+    // Event listeners para os botões de adicionar ao carrinho
+    const btnAddPizza = document.getElementById('btn-add-pizza');
+    if (btnAddPizza) {
+        btnAddPizza.addEventListener('click', addPizzaToCart);
+    }
+
+    const btnAddDrink = document.getElementById('btn-add-drink');
+    if (btnAddDrink) {
+        btnAddDrink.addEventListener('click', addDrinkToCart);
     }
 
     // Event listeners para os controles do delivery

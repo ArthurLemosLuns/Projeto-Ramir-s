@@ -1,4 +1,4 @@
-# ⚡ Quick Start - Marlons
+# ⚡ Quick Start - Ramir's Pizzaria Entertainment
 
 ## ✨ Começar em 3 passos!
 
@@ -41,7 +41,7 @@ Acesse: **http://localhost:8000**
 
 ### 🔓 Fazer Login:
 1. Use seus dados cadastrados
-2. ✅ Será redirecionado para **Dashboard Marlons**
+2. ✅ Será redirecionado para **Dashboard Ramir's Pizzaria**
 
 ### 🚪 Sair:
 1. Clique em "Sair" no topo direito

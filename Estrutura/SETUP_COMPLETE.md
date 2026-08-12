@@ -1,4 +1,4 @@
-# 🎉 Projeto Marlons - Completo e Pronto!
+# 🎉 Projeto Ramir's Pizzaria Entertainment - Completo e Pronto!
 
 ## ✅ O Que Foi Criado
 
@@ -48,7 +48,7 @@ Projeto-Ainda-sem-Nome/
 - ✅ Design moderno e intuitivo
 - ✅ Transições elegantes
 
-### 📊 Dashboard Marlons
+### 📊 Dashboard Ramir's Pizzaria
 - ✅ Bem-vindo personalizado
 - ✅ 4 Cards com funcionalidades
 - ✅ Menu de navegação
@@ -109,7 +109,7 @@ Abra: **http://localhost:8000** 🎉
 
 ### 1. Criar Conta
 ```
-E-mail: teste@marlons.com
+E-mail: teste@ramirs.com
 Senha: abc123456
 Confirmar: abc123456
 Nome: Seu Nome
@@ -117,7 +117,7 @@ Nome: Seu Nome
 
 ### 2. Fazer Login
 ```
-E-mail: teste@marlons.com
+E-mail: teste@ramirs.com
 Senha: abc123456
 ```
 
@@ -204,7 +204,7 @@ Senha: abc123456
    ↓
 9️⃣ Frontend armazena em localStorage
    ↓
-🔟 Página redireciona para Dashboard Marlons
+🔟 Página redireciona para Dashboard Ramir's Pizzaria
    ↓
 ✅ Exibe bem-vindo + 4 cards de funcionalidades
 ```
@@ -232,10 +232,10 @@ background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
 Substitua no `index.html`:
 ```html
 <!-- De -->
-<h1>Marlons</h1>
+<h1>Ramir's Pizzaria</h1>
 
 <!-- Para -->
-<img src="logo.png" alt="Marlons">
+<img src="logo.png" alt="Ramir's Pizzaria">
 ```
 
 ---
@@ -282,7 +282,7 @@ Substitua no `index.html`:
 
 ## 🎉 Parabéns!
 
-Seu sistema **Marlons** está:
+Seu sistema **Ramir's Pizzaria Entertainment** está:
 - ✅ Funcional
 - ✅ Seguro
 - ✅ Responsivo
@@ -293,4 +293,4 @@ Seu sistema **Marlons** está:
 
 **Desenvolvido com ❤️ - 04 de Junho de 2026**
 
-**Marlons © 2026 - Todos os direitos reservados**
+**Ramir's Pizzaria Entertainment © 2026 - Todos os direitos reservados**

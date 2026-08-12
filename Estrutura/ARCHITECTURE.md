@@ -1,4 +1,4 @@
-# 🏗️ Arquitetura do Projeto Marlons
+# 🏗️ Arquitetura do Projeto Ramir's Pizzaria Entertainment
 
 ## 📊 Visão Geral
 

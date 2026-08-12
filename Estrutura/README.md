@@ -1,4 +1,4 @@
-# 🎯 Marlons - Sistema de Login e Dashboard
+# 🎯 Ramir's Pizzaria Entertainment - Sistema de Login e Cardápio
 
 Um projeto completo de sistema de login integrado com banco de dados SQLite3, desenvolvido com Node.js, Express, HTML, CSS e JavaScript.
 
@@ -11,7 +11,7 @@ Um projeto completo de sistema de login integrado com banco de dados SQLite3, de
 - Senhas criptografadas com bcrypt
 - Token JWT para sessão
 
-✅ **Dashboard Marlons**
+✅ **Dashboard Ramir's Pizzaria**
 - Interface responsiva
 - Bem-vindo personalizado
 - Cards com funcionalidades
@@ -105,7 +105,7 @@ Acesse: `http://localhost:8000`
 
 ### Fazer Login:
 1. Use o email e senha cadastrados
-2. Será redirecionado para o Dashboard Marlons
+2. Será redirecionado para o Dashboard Ramir's Pizzaria
 
 ### Logout:
 1. Clique em "Sair" no canto superior direito
@@ -148,4 +148,4 @@ Este projeto é de código aberto e pode ser usado livremente.
 
 ---
 
-**Desenvolvido com ❤️ para Marlons**
+**Desenvolvido com ❤️ para Ramir's Pizzaria Entertainment**

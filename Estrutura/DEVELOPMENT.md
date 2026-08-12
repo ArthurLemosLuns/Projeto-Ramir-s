@@ -1,4 +1,4 @@
-# 👨‍💻 Guia de Desenvolvimento - Marlons
+# 👨‍💻 Guia de Desenvolvimento - Ramir's Pizzaria Entertainment
 
 ## 📚 Aprendizados Principais
 
@@ -343,4 +343,4 @@ Se encontrar problemas:
 
 ---
 
-**Happy Coding! 🚀 Marlons - 2026**
+**Happy Coding! 🚀 Ramir's Pizzaria Entertainment - 2026**

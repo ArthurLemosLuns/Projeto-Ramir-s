@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Cardápio - Ramir's Pizzeria</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#41493e",
+                        "primary": "#00450d",
+                        "tertiary-fixed-dim": "#fabd00",
+                        "on-secondary-fixed": "#0f2000",
+                        "inverse-surface": "#2c3228",
+                        "primary-fixed": "#acf4a4",
+                        "surface-container-low": "#eff6e7",
+                        "outline": "#717a6d",
+                        "surface-container-highest": "#dee5d6",
+                        "on-secondary-container": "#437000",
+                        "on-error": "#ffffff",
+                        "tertiary": "#4c3700",
+                        "on-secondary-fixed-variant": "#2e4f00",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#1b5e20",
+                        "on-tertiary-fixed": "#261a00",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#90d689",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "primary-fixed-dim": "#91d78a",
+                        "surface-container": "#e9f0e1",
+                        "on-primary-fixed": "#002203",
+                        "surface-tint": "#2a6b2c",
+                        "tertiary-container": "#694d00",
+                        "tertiary-fixed": "#ffdf9e",
+                        "inverse-primary": "#91d78a",
+                        "secondary-fixed": "#b9f474",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f5fced",
+                        "surface": "#f5fced",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e3ebdc",
+                        "background": "#f5fced",
+                        "outline-variant": "#c0c9bb",
+                        "on-tertiary-container": "#f8bb00",
+                        "on-primary-fixed-variant": "#0c5216",
+                        "surface-variant": "#dee5d6",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#3e6a00",
+                        "secondary-container": "#b9f474",
+                        "on-background": "#171d14",
+                        "surface-dim": "#d5dcce",
+                        "on-surface": "#171d14",
+                        "inverse-on-surface": "#ecf3e4",
+                        "secondary-fixed-dim": "#9ed75b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1200px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "unit": "8px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-lg": ["Be Vietnam Pro"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    },
+                    "boxShadow": {
+                        "ambient": "0 4px 20px -2px rgba(0, 69, 13, 0.08)",
+                        "ambient-hover": "0 10px 25px -4px rgba(0, 69, 13, 0.12)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .shadow-ambient { box-shadow: 0 4px 20px rgba(0, 69, 13, 0.05); }
+        .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0, 69, 13, 0.08); }
+        .filter-btn.active { background-color: rgba(185, 244, 116, 0.2); color: #3e6a00; border-color: #b9f474; }
+        .drink-size-btn.active { background-color: #1b5e20; color: #ffffff; border-color: #1b5e20; }
+    </style>
+</head>
+<body class="font-body-md antialiased pt-24">
+<!-- TopNavBar Component -->
+<header class="bg-surface/90 backdrop-blur-md fixed top-0 w-full z-50 shadow-sm">
+<div class="flex justify-between items-center px-margin-mobile md:pl-margin-desktop md:pr-4 h-20 w-full">
+<div class="flex items-center h-full w-full px-margin-mobile md:px-8">
+    <div class="flex-1 flex justify-start">
+        <a class="font-headline-md text-headline-md text-primary font-bold tracking-tight flex items-center gap-2" href="home.html">
+            <img alt="Ramir's capybara mascot logo" class="w-10 h-10 object-contain rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm0ePckP08G8OxbenYE6Hfw9yRZ6nfMDWLWjdpOvv4RznTHBRcLLLzZNYwPupDZ8NIroYhGRgeiwj6JgG5TEWrU3qCduD0cAyhxZ6wi9pAEK7-KiBSPE9oqH-k1euFKCjUC-ggMUa5aQpIezcBD6DeqgpIzQsaEs98m76kSviE5hcWfXdMkdEEe1050A-cK5XC14CYMohqbXtb5DKY3Jc7XwN7d-VU0T-4AFoxiQ1IUiUHBghNqgxEsvfsZXPiD8YL3QU">
+            Ramir's Pizzaria
+        </a>
+    </div>
+    <nav class="hidden md:flex gap-gutter items-center justify-center">
+        <a class="text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg" href="home.html">Início</a>
+        <a class="text-primary border-b-2 border-primary pb-1 font-bold font-label-lg text-label-lg" href="cardapio.html">Cardápio</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg" href="delivery.html">Delivery</a>
+    </nav>
+    <div class="flex-1 flex justify-end items-center">
+        <a href="login.html" class="bg-primary text-on-primary font-label-lg text-label-lg px-6 py-2.5 rounded-full hover:bg-primary-container/90 transition-all duration-200 shadow-ambient scale-95 active:scale-90 flex items-center gap-2">
+            <span class="material-symbols-outlined fill-icon text-lg">login</span>
+            Entrar
+        </a>
+    </div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg min-h-screen">
+<!-- Page Header -->
+<header class="text-center mb-stack-lg md:mb-16">
+<h1 class="font-display-lg text-display-lg text-primary mb-4">Celebração de Sabores</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Um cardápio feito para espalhar alegria! Ingredientes frescos, massa artesanal e o toque especial do Ramir. Muita diversão, capivara de montão!</p>
+</header>
+<!-- Categories / Filters -->
+<div class="flex flex-wrap justify-center gap-3 mb-stack-lg">
+<button class="filter-btn active px-6 py-2 rounded-full bg-secondary-container/20 text-secondary border border-secondary-container font-label-lg text-label-lg hover:bg-secondary-container/30 transition-colors" data-filter="todos">Todos</button>
+<button class="filter-btn px-6 py-2 rounded-full bg-surface text-on-surface-variant border border-outline-variant font-label-lg text-label-lg hover:bg-surface-variant transition-colors" data-filter="salgada">Salgadas</button>
+<button class="filter-btn px-6 py-2 rounded-full bg-surface text-on-surface-variant border border-outline-variant font-label-lg text-label-lg hover:bg-surface-variant transition-colors" data-filter="doce">Doces</button>
+<button class="filter-btn px-6 py-2 rounded-full bg-surface text-on-surface-variant border border-outline-variant font-label-lg text-label-lg hover:bg-surface-variant transition-colors" data-filter="bebida">Bebidas</button>
+</div>
+<!-- Pizzas Grid -->
+<div id="pizzas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter"></div>
+<!-- Drinks Section -->
+<div id="drinks-section" class="mt-16">
+<div class="text-center mb-8">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">Bebidas em Destaque</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Escolha entre refrigerantes, sucos e bebidas especiais para acompanhar sua pizza.</p>
+<div id="drink-size-selector" class="flex flex-wrap justify-center gap-3 mt-6"></div>
+</div>
+<div id="drinks-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter"></div>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="bg-surface-container-highest w-full py-12 mt-stack-lg">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="md:col-span-1 mb-8 md:mb-0">
+<span class="font-headline-md text-headline-md text-primary font-bold block mb-4">Ramir's Pizzeria</span>
+<p class="font-body-md text-body-md text-on-surface-variant">A celebração mais saborosa e relaxante da cidade. Massa artesanal, ingredientes selecionados e muita alegria em cada fatia!</p>
+</div>
+<div class="md:col-span-2 grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-2">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Contato</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Localização</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Privacidade</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:underline" href="#">Termos</a>
+</div>
+</div>
+<div class="md:col-span-1 flex flex-col justify-end items-start md:items-end mt-8 md:mt-0 opacity-80 hover:opacity-100 transition-opacity">
+<p class="font-label-sm text-label-sm text-on-surface-variant text-left md:text-right">© 2026 Ramir's Pizzeria - Muita diversão, capivara de montão!</p>
+</div>
+</div>
+</footer>
+
+<script>
+// ===== DADOS DO SISTEMA =====
+const pizzaCategories = [
+    {
+        title: 'Pizza salgada',
+        sizes: [
+            { size: 'Pequena', items: [ { name: 'Margherita', description: 'Molho de tomate, mussarela e manjericão.', price: 'R$ 34,90' }, { name: 'Pepperoni', description: 'Pepperoni, mussarela e borda crocante.', price: 'R$ 39,90' } ] },
+            { size: 'Média', items: [ { name: 'Frango com Catupiry', description: 'Frango, catupiry e cebola crocante.', price: 'R$ 49,90' }, { name: 'Quatro Queijos', description: 'Mussarela, provolone, gorgonzola e parmesão.', price: 'R$ 52,90' } ] },
+            { size: 'Grande', items: [ { name: 'Calabresa Especial', description: 'Calabresa, cebola e queijo derretido.', price: 'R$ 59,90' }, { name: 'Vegetariana', description: 'Tomate, abobrinha, pimentão e champignon.', price: 'R$ 57,90' } ] },
+            { size: 'Família', items: [ { name: 'Bacon com Cebola', description: 'Bacon, cebola caramelizada e queijo premium.', price: 'R$ 69,90' }, { name: 'Mussarela Especial', description: 'Mussarela generosa e molho artesanal.', price: 'R$ 66,90' } ] }
+        ]
+    },
+    {
+        title: 'Pizza doce',
+        sizes: [
+            { size: 'Pequena', items: [ { name: 'Chocolate com Morango', description: 'Chocolate ao leite e morangos frescos.', price: 'R$ 36,90' }, { name: 'Romeu e Julieta', description: 'Queijo minas com goiabada.', price: 'R$ 34,90' } ] },
+            { size: 'Média', items: [ { name: 'Banoffee', description: 'Banana, doce de leite e chocolate.', price: 'R$ 46,90' }, { name: 'Prestígio', description: 'Chocolate, coco e raspas de chocolate.', price: 'R$ 44,90' } ] },
+            { size: 'Grande', items: [ { name: 'Nutella com Banana', description: 'Nutella, banana e castanhas.', price: 'R$ 56,90' }, { name: 'Brigadeiro', description: 'Brigadeiro e granulado crocante.', price: 'R$ 54,90' } ] },
+            { size: 'Família', items: [ { name: 'Sensação', description: 'Chocolate, morango e creme.', price: 'R$ 64,90' }, { name: 'Confetti', description: 'Chocolate, confete e creme de leite.', price: 'R$ 62,90' } ] }
+        ]
+    }
+];
+
+const drinkSizes = {
+    '250ml': { price: 'R$ 6,90', brands: [ { name: 'Pepsi', flavors: ['Cola', 'Zero'] }, { name: 'Coca-Cola', flavors: ['Original', 'Zero'] }, { name: 'Fanta', flavors: ['Laranja', 'Uva'] }, { name: 'Guaraná Antarctica', flavors: ['Original', 'Zero'] } ] },
+    '500ml': { price: 'R$ 9,90', brands: [ { name: 'Pepsi', flavors: ['Cola', 'Limao'] }, { name: 'Coca-Cola', flavors: ['Original', 'Zero'] }, { name: 'Fanta', flavors: ['Laranja', 'Guaraná'] }, { name: 'Guaraná Antarctica', flavors: ['Original', 'Sem Açúcar'] } ] },
+    '1,5L': { price: 'R$ 14,90', brands: [ { name: 'Pepsi', flavors: ['Cola', 'Manga'] }, { name: 'Coca-Cola', flavors: ['Original', 'Zero'] }, { name: 'Fanta', flavors: ['Laranja', 'Uva'] }, { name: 'Guaraná Antarctica', flavors: ['Original', 'Zero'] } ] },
+    '2L': { price: 'R$ 18,90', brands: [ { name: 'Pepsi', flavors: ['Cola', 'Pêssego'] }, { name: 'Coca-Cola', flavors: ['Original', 'Zero'] }, { name: 'Fanta', flavors: ['Laranja', 'Manga'] }, { name: 'Guaraná Antarctica', flavors: ['Original', 'Sem Açúcar'] } ] }
+};
+
+// ===== FOTOS REAIS (do protótipo e Unsplash) =====
+const pizzaImages = {
+    'Margherita': 'https://lh3.googleusercontent.com/aida-public/AB6AXuBjcUaCO3NticELOPa1aUefwKWDlS9MOz7hPv8Sa1JPbAZTh9cYkPmPbQbUvkt9XxQ2CvnRNNZOIBtF44lBGm8jHHeFgD1Mg3qQkvtS96_u9q7jVSJBGgpuWlDKO9OsamzMq9IF2tKBYK4_hlFo6--pd2ODSMe-nIAWLaav3I9Y_4ShZgdrL4VS2WB-0MJmQtnphib6GddZy7pXSqbM-0gI3j4zxP7pFlaH3aZNZkESbuJG2CCYttov6w',
+    'Pepperoni': 'https://lh3.googleusercontent.com/aida-public/AB6AXuAYPubEhbimgg6bg9ynZOj1IQfC0zDjwIUyOXIs-L0EwE0Dep4KRd3oPqktTrMYk3w5uNWln46R8V-uXo34qDaXYX4wEwRbBahMGm_aAVCfYmCk6SRMhhmCJrglhwZPJTxwpSZK5mV2sva3Yva4r8H26tpp7X3cBO4GIE_8ZhO9hM56RbRAonQc5kXYiKFeav4MQG_0a_PQU8a3HEwI3sXxh5Tx4g-RvN60awMoQpgD4dSoluqP0gadMQ',
+    'Quatro Queijos': 'https://lh3.googleusercontent.com/aida-public/AB6AXuATojoWEHvvV11qZ488ajvzgrqUbwBJnpHiga_KEA9zJfobLKlT9c-RGtYsztFJWePX8Ld7aUYLBydF5IX6e8en4wft6nGGyzreAIhbKoYHUArBng9YP1bDhzaVA6qSyLYyKnbSBVBtdC92zpTBzm671Aq8MQ47gxAWT7AJrbF_fHXdYODdO7k1g5r32o9VVpKmtwUI3Xhb48OMO9b7W6cj7Bhd2IUCBuNArFm0UpXdiDLQIKfoKkzlDA',
+    'Vegetariana': 'https://lh3.googleusercontent.com/aida-public/AB6AXuCmSIxLcXEQckXz7fFkDn-9khr3l9-T1vhm0tiqnI7gW4JCeSnVc_LIyHWqTmP07cuCJF1umajJk93kUaBTTxQgS08hJqJa31ZXb14_3P3br4sqzIh1Zb5t8rrYaugGrKD_wiZIvxUYg4nBF1mj1J-A4HKEFW2DSpmf1f59tyQyJCVCJA5_k1tBC8f1WIPhEcQWMSQcu_OpJi4bkuorYMy3TKYJSW6ERXrryqD6YqT5ea1I8XXxcMd5nA',
+    'Calabresa Especial': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600',
+    'Frango com Catupiry': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600',
+    'Bacon com Cebola': 'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=600',
+    'Mussarela Especial': 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600',
+    'Chocolate com Morango': 'https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2d?w=600',
+    'Romeu e Julieta': 'https://images.unsplash.com/photo-1511688878353-3a2f5be94cd7?w=600',
+    'Banoffee': 'https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600',
+    'Prestígio': 'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600',
+    'Nutella com Banana': 'https://images.unsplash.com/photo-1546177461-79222cb60a2b?w=600',
+    'Brigadeiro': 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=600',
+    'Sensação': 'https://images.unsplash.com/photo-1587314168485-3236d6710814?w=600',
+    'Confetti': 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600'
+};
+
+const drinkImages = {
+    'Coca-Cola': 'https://images.unsplash.com/photo-1554866585-cd94860890b7?w=600',
+    'Pepsi': 'https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=600',
+    'Fanta': 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=600',
+    'Guaraná Antarctica': 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=600'
+};
+
+let selectedDrinkSize = '500ml';
+
+// ===== RENDERIZAÇÃO =====
+function buildPizzaCard(item, size, cat) {
+    const img = pizzaImages[item.name] || 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600';
+    const tagLabel = cat === 'doce' ? 'Doce' : 'Salgada';
+    const extraTag = item.name === 'Vegetariana' ? '<span class="inline-block px-2 py-1 bg-secondary-container/10 text-secondary rounded font-label-sm text-label-sm">Vegetariana</span>' : '';
+    return `
+        <article class="bg-surface-container-lowest rounded-xl shadow-ambient hover-lift overflow-hidden flex flex-col group" data-category="${cat}">
+            <div class="h-48 relative overflow-hidden">
+                <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="${img}" alt="${item.name}">
+                <span class="absolute top-4 right-4 bg-surface-container-lowest/90 backdrop-blur-sm px-3 py-1 rounded-full text-primary font-label-sm font-bold shadow-sm">${size}</span>
+            </div>
+            <div class="p-stack-md flex-1 flex flex-col">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-headline-md text-headline-md text-primary">${item.name}</h3>
+                    <span class="font-headline-md text-headline-md text-tertiary">${item.price}</span>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-4 flex-1">${item.description}</p>
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="inline-block px-2 py-1 bg-secondary-container/10 text-secondary rounded font-label-sm text-label-sm">${tagLabel}</span>
+                    ${extraTag}
+                </div>
+                <button class="w-full py-3 rounded-lg border-2 border-primary text-primary font-label-lg text-label-lg hover:bg-primary-container/10 transition-colors flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_shopping_cart</span>
+                    Adicionar
+                </button>
+            </div>
+        </article>`;
+}
+
+function renderPizzas() {
+    const grid = document.getElementById('pizzas-grid');
+    let cards = '';
+    pizzaCategories.forEach(category => {
+        const catKey = category.title.includes('doce') ? 'doce' : 'salgada';
+        category.sizes.forEach(sizeGroup => {
+            sizeGroup.items.forEach(item => {
+                cards += buildPizzaCard(item, sizeGroup.size, catKey);
+            });
+        });
+    });
+    grid.innerHTML = cards;
+}
+
+function renderDrinks() {
+    const data = drinkSizes[selectedDrinkSize];
+    const selector = document.getElementById('drink-size-selector');
+    selector.innerHTML = Object.keys(drinkSizes).map(size => `
+        <button class="px-6 py-2 rounded-full border font-label-lg text-label-lg transition-colors drink-size-btn ${size === selectedDrinkSize ? 'active' : 'bg-surface text-on-surface-variant border-outline-variant hover:bg-surface-variant'}" data-size="${size}">
+            ${size}
+        </button>
+    `).join('');
+
+    selector.querySelectorAll('.drink-size-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            selectedDrinkSize = btn.getAttribute('data-size');
+            renderDrinks();
+        });
+    });
+
+    const grid = document.getElementById('drinks-grid');
+    grid.innerHTML = data.brands.map(brand => {
+        const img = drinkImages[brand.name] || 'https://images.unsplash.com/photo-1554866585-cd94860890b7?w=600';
+        const flavors = brand.flavors.map(f => `<span class="inline-block px-2 py-1 bg-secondary-container/10 text-secondary rounded font-label-sm text-label-sm">${f}</span>`).join('');
+        return `
+            <article class="bg-surface-container-lowest rounded-xl shadow-ambient hover-lift overflow-hidden flex flex-col group">
+                <div class="h-40 relative overflow-hidden">
+                    <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="${img}" alt="${brand.name}">
+                    <span class="absolute top-4 right-4 bg-surface-container-lowest/90 backdrop-blur-sm px-3 py-1 rounded-full text-primary font-label-sm font-bold shadow-sm">${selectedDrinkSize}</span>
+                </div>
+                <div class="p-stack-md flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-headline-md text-headline-md text-primary">${brand.name}</h3>
+                        <span class="font-headline-md text-headline-md text-tertiary">${data.price}</span>
+                    </div>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-4 flex-1">Sabores disponíveis (${selectedDrinkSize}):</p>
+                    <div class="flex flex-wrap gap-2 mb-4">${flavors}</div>
+                    <button class="w-full py-3 rounded-lg border-2 border-primary text-primary font-label-lg text-label-lg hover:bg-primary-container/10 transition-colors flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_shopping_cart</span>
+                        Adicionar
+                    </button>
+                </div>
+            </article>`;
+    }).join('');
+}
+
+// ===== FILTROS =====
+function applyFilter(filter) {
+    const pizzasGrid = document.getElementById('pizzas-grid');
+    const drinksSection = document.getElementById('drinks-section');
+
+    document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('active', 'bg-secondary-container/20', 'text-secondary', 'border-secondary-container');
+        b.classList.add('bg-surface', 'text-on-surface-variant', 'border-outline-variant');
+    });
+    const activeBtn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
+    activeBtn.classList.add('active', 'bg-secondary-container/20', 'text-secondary', 'border-secondary-container');
+    activeBtn.classList.remove('bg-surface', 'text-on-surface-variant', 'border-outline-variant');
+
+    if (filter === 'bebida') {
+        pizzasGrid.style.display = 'none';
+        drinksSection.style.display = 'block';
+    } else if (filter === 'salgada' || filter === 'doce') {
+        drinksSection.style.display = 'none';
+        pizzasGrid.style.display = 'grid';
+        pizzasGrid.querySelectorAll('[data-category]').forEach(card => {
+            card.style.display = card.dataset.category === filter ? '' : 'none';
+        });
+    } else {
+        pizzasGrid.style.display = 'grid';
+        pizzasGrid.querySelectorAll('[data-category]').forEach(card => { card.style.display = ''; });
+        drinksSection.style.display = 'block';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderPizzas();
+    renderDrinks();
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => applyFilter(btn.getAttribute('data-filter')));
+    });
+});
+</script>
+</body>
+</html>

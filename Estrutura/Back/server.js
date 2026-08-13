@@ -390,9 +390,9 @@ app.get('/api/delivery/orders', (req, res) => {
     res.json(deliveryOrders);
 });
 
-// Rota de teste
+// Rota principal - Home
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../Front/index.html'));
+    res.sendFile(path.join(__dirname, '../Front/home.html'));
 });
 
 // Rota de teste - simple ping

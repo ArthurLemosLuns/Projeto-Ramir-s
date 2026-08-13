@@ -1,0 +1,310 @@
+<!DOCTYPE html><html class="light" lang="pt-BR" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Ramir's Pizzaria</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#41493e",
+                        "primary": "#00450d",
+                        "tertiary-fixed-dim": "#fabd00",
+                        "on-secondary-fixed": "#0f2000",
+                        "inverse-surface": "#2c3228",
+                        "primary-fixed": "#acf4a4",
+                        "surface-container-low": "#eff6e7",
+                        "outline": "#717a6d",
+                        "surface-container-highest": "#dee5d6",
+                        "on-secondary-container": "#437000",
+                        "on-error": "#ffffff",
+                        "tertiary": "#4c3700",
+                        "on-secondary-fixed-variant": "#2e4f00",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#1b5e20",
+                        "on-tertiary-fixed": "#261a00",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#90d689",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "primary-fixed-dim": "#91d78a",
+                        "surface-container": "#e9f0e1",
+                        "on-primary-fixed": "#002203",
+                        "surface-tint": "#2a6b2c",
+                        "tertiary-container": "#694d00",
+                        "tertiary-fixed": "#ffdf9e",
+                        "inverse-primary": "#91d78a",
+                        "secondary-fixed": "#b9f474",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f5fced",
+                        "surface": "#f5fced",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e3ebdc",
+                        "background": "#f5fced",
+                        "outline-variant": "#c0c9bb",
+                        "on-tertiary-container": "#f8bb00",
+                        "on-primary-fixed-variant": "#0c5216",
+                        "surface-variant": "#dee5d6",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#3e6a00",
+                        "secondary-container": "#b9f474",
+                        "on-background": "#171d14",
+                        "surface-dim": "#d5dcce",
+                        "on-surface": "#171d14",
+                        "inverse-on-surface": "#ecf3e4",
+                        "secondary-fixed-dim": "#9ed75b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1200px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "unit": "8px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-lg": ["Be Vietnam Pro"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    },
+                    "boxShadow": {
+                        "ambient": "0 4px 20px -2px rgba(0, 69, 13, 0.08)",
+                        "ambient-hover": "0 10px 25px -4px rgba(0, 69, 13, 0.12)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased font-body-md pt-20">
+<!-- TopNavBar -->
+<header class="bg-surface/90 dark:bg-inverse-surface/90 backdrop-blur-md fixed top-0 w-full z-50 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-margin-mobile md:pl-margin-desktop md:pr-4 h-20 w-full"><div class="flex items-center h-full w-full px-margin-mobile md:px-8">
+    <div class="flex-1 flex justify-start">
+        <a class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim font-bold tracking-tight flex items-center gap-2" href="#">
+            <img alt="Ramir's capybara mascot logo" class="w-10 h-10 object-contain rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm0ePckP08G8OxbenYE6Hfw9yRZ6nfMDWLWjdpOvv4RznTHBRcLLLzZNYwPupDZ8NIroYhGRgeiwj6JgG5TEWrU3qCduD0cAyhxZ6wi9pAEK7-KiBSPE9oqH-k1euFKCjUC-ggMUa5aQpIezcBD6DeqgpIzQsaEs98m76kSviE5hcWfXdMkdEEe1050A-cK5XC14CYMohqbXtb5DKY3Jc7XwN7d-VU0T-4AFoxiQ1IUiUHBghNqgxEsvfsZXPiD8YL3QU">
+            Ramir's Pizzaria
+        </a>
+    </div>
+    <nav class="hidden md:flex gap-gutter items-center justify-center">
+        <a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim pb-1 font-bold font-label-lg text-label-lg" href="#">Início</a>
+        <a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-label-lg text-label-lg" href="#">Cardápio</a>
+        <a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-label-lg text-label-lg" href="#">Delivery</a>
+    </nav>
+    <div class="flex-1 flex justify-end items-center">
+        <button class="bg-primary text-on-primary font-label-lg text-label-lg px-6 py-2.5 rounded-full hover:bg-primary-container/90 transition-all duration-200 shadow-ambient hover:shadow-ambient-hover scale-95 active:scale-90 flex items-center gap-2">
+            <span class="material-symbols-outlined fill-icon text-lg">login</span>
+            Entrar
+        </button>
+    </div>
+</div></div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[80vh] flex items-center pt-stack-lg pb-stack-lg overflow-hidden">
+<div class="absolute inset-0 bg-surface-container-low -z-10"></div>
+<!-- Decorative blobs -->
+<div class="absolute top-0 right-0 w-1/2 h-full bg-primary-fixed/20 rounded-l-[100px] blur-3xl -z-10 transform translate-x-1/4"></div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div class="space-y-stack-md z-10">
+<div class="inline-flex items-center gap-2 bg-secondary-container/30 px-4 py-2 rounded-full">
+<span class="material-symbols-outlined text-secondary" data-icon="local_pizza">local_pizza</span>
+<span class="font-label-lg text-label-lg text-secondary">Muita diversão, capivara de montão!</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary md:leading-tight">A Festa Mais Relaxante da Cidade!</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">Junte sua galera para a melhor experiência de pizza da região! Aqui, a diversão das capivaras encontra o sabor artesanal em um ambiente feito para você rir, relaxar e criar memórias inesquecíveis.</p>
+<div class="pt-stack-sm flex flex-wrap gap-4">
+<button class="bg-primary text-on-primary font-label-lg text-label-lg px-8 py-3.5 rounded-full hover:bg-primary-container transition-colors shadow-ambient hover:shadow-ambient-hover flex items-center gap-2">
+<span class="material-symbols-outlined fill-icon" data-icon="shopping_basket">shopping_basket</span>
+                                Fazer Pedido
+                            </button>
+<button class="border-2 border-primary text-primary font-label-lg text-label-lg px-8 py-3.5 rounded-full hover:bg-primary/5 transition-colors flex items-center gap-2">
+                                Ver Cardápio
+                            </button>
+</div>
+</div>
+<div class="relative flex justify-center items-center">
+<div class="relative w-full max-w-md aspect-square rounded-full bg-surface shadow-ambient flex items-center justify-center p-8 z-10 border-4 border-surface-container">
+<img alt="Mascote Ramir comendo pizza" class="w-full h-full object-contain drop-shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvudC2_rkAf7ngd38UbVcSS2pJhhNIKbcmABiytwrQkfFF25x4T32TXae_U3Y4w163ceWC8SmKtLq3Sa8ZKgE647OGsIICwcTzI_3L4olUj2CJGTR9GVklLjdB8aPNBtfJTTpxta61p2bhjIKpdETwTfcgn0KqNLLftkqGiSPrNO0d967VKwATOm5d5NBI1LKiw9Jv0Axww8w01aFjSFPi7ucs9CexvAMPqgkVedrrDwB3iQUNiL3TaJi0JDsUhlkUBJY">
+</div>
+<!-- Floating elements -->
+
+</div>
+</div>
+</div>
+</section>
+<!-- Our Story / Atmosphere Section -->
+<section class="py-stack-lg md:py-24 bg-surface relative">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-5 relative">
+<img class="w-full h-[500px] object-cover rounded-[32px] shadow-ambient" data-alt="A warm, inviting interior of a modern artisanal pizzeria. Rustic wooden tables, hanging green plants, warm low-key lighting, a brick oven in the background. The atmosphere is relaxed and friendly, reflecting a corporate modern style with organic touches. Light green and dark green accents are subtly visible." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCOtHbVExP6kyYDr9yQvHkWosRKrYT3eJNyVHjk5YZzBR-OlHj4-lmsLBGZ9iSlCzOW0gFRjBGRdqFrcYqt8oHBTJsGeSnob8GvblriCySb-vhKXiDyYHnJFy-mpgHEGURENy6dS6-bOqJV819cseGDSZyhUSEzFRuyrKVFIU-q14_Z_28j_PzkYPrd81aR-SFU4l62aAFaqfjh8ahjWKHz4n3bism_KHAVvEMbAtNCRVVCkbHYVqHhg">
+<div class="absolute -bottom-6 -right-6 bg-surface-container-highest rounded-2xl p-6 shadow-ambient max-w-[200px]">
+<span class="material-symbols-outlined text-primary text-3xl mb-2" data-icon="nature_people">nature_people</span>
+<p class="font-label-lg text-label-lg text-primary">Ambiente Familiar &amp; Tranquilo</p>
+</div>
+</div>
+<div class="md:col-span-1"></div>
+<div class="md:col-span-6 space-y-stack-md">
+<h2 class="font-headline-lg text-headline-lg text-primary">Nossa História, Nosso Jeito Capivara de Ser</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Na Ramir's, acreditamos que a vida é melhor quando a diversão encontra a paz. Nossa missão é ser o seu refúgio favorito: um lugar para descompressão total, onde cada risada é acompanhada por uma fatia perfeita.</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Com ingredientes premium e nossa famosa massa de 48h, preparamos tudo com o carinho e a calma que você merece. Venha viver o jeito capivara de ser: sociável, tranquilo e sempre feliz!</p>
+<div class="grid grid-cols-2 gap-4 pt-stack-sm">
+<div class="bg-surface-container-low p-4 rounded-xl">
+<span class="material-symbols-outlined text-secondary text-2xl mb-2" data-icon="eco">eco</span>
+<h3 class="font-label-lg text-label-lg text-on-surface font-bold">Ingredientes Frescos</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Selecionados diariamente.</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl">
+<span class="material-symbols-outlined text-secondary text-2xl mb-2" data-icon="bakery_dining">bakery_dining</span>
+<h3 class="font-label-lg text-label-lg text-on-surface font-bold">Massa Artesanal</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Fermentação de 48 horas.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Special Pizzas Section -->
+<section class="py-stack-lg md:py-24 bg-surface-container-low">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-stack-lg">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">As Favoritas do Ramir</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Prepare o paladar! Estas são as obras-primas que fazem todo mundo sorrir entre uma mordida e outra.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Pizza Card 1 -->
+<div class="bg-surface rounded-2xl overflow-hidden shadow-ambient hover:shadow-ambient-hover transition-all duration-300 transform hover:-translate-y-1">
+<img class="w-full h-48 object-cover" data-alt="A delicious, perfectly baked artisanal Margherita pizza viewed from above. Blistered crust, fresh basil leaves, melted mozzarella, and rich red tomato sauce. Sitting on a wooden serving board in a brightly lit modern pizzeria setting with a soft green ambiance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjcUaCO3NticELOPa1aUefwKWDlS9MOz7hPv8Sa1JPbAZTh9cYkPmPbQbUvkt9XxQ2CvnRNNZOIBtF44lBGm8jHHeFgD1Mg3qQkvtS96_u9q7jVSJBGgpuWlDKO9OsamzMq9IF2tKBYK4_hlFo6--pd2ODSMe-nIAWLaav3I9Y_4ShZgdrL4VS2WB-0MJmQtnphib6GddZy7pXSqbM-0gI3j4zxP7pFlaH3aZNZkESbuJG2CCYttov6w">
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-primary text-xl">Margherita Clássica</h3>
+<span class="font-label-lg text-label-lg text-secondary font-bold">R$ 45</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 h-12 overflow-hidden">
+                                Molho de tomate artesanal, mozzarella de búfala fresca, manjericão e azeite extravirgem.
+                            </p>
+<button class="w-full bg-primary/10 text-primary font-label-lg text-label-lg py-2.5 rounded-full hover:bg-primary/20 transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add_shopping_cart">add_shopping_cart</span>
+                                Adicionar
+                            </button>
+</div>
+</div>
+<!-- Pizza Card 2 -->
+<div class="bg-surface rounded-2xl overflow-hidden shadow-ambient hover:shadow-ambient-hover transition-all duration-300 transform hover:-translate-y-1 relative">
+<div class="absolute top-4 right-4 bg-tertiary-fixed-dim text-on-tertiary-fixed font-label-sm text-label-sm px-3 py-1 rounded-full font-bold z-10 shadow-sm">
+                            Mais Pedida
+                        </div>
+<img class="w-full h-48 object-cover" data-alt="A rustic Pepperoni pizza straight from a wood-fired oven. Crispy edges on the pepperoni slices, gooey bubbling cheese, on a perfectly charred artisan crust. Shot in a warm, appetizing light in a modern corporate-meets-playful setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYPubEhbimgg6bg9ynZOj1IQfC0zDjwIUyOXIs-L0EwE0Dep4KRd3oPqktTrMYk3w5uNWln46R8V-uXo34qDaXYX4wEwRbBahMGm_aAVCfYmCk6SRMhhmCJrglhwZPJTxwpSZK5mV2sva3Yva4r8H26tpp7X3cBO4GIE_8ZhO9hM56RbRAonQc5kXYiKFeav4MQG_0a_PQU8a3HEwI3sXxh5Tx4g-RvN60awMoQpgD4dSoluqP0gadMQ">
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-primary text-xl">Pepperoni do Chefe</h3>
+<span class="font-label-lg text-label-lg text-secondary font-bold">R$ 55</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 h-12 overflow-hidden">
+                                Generosas fatias de pepperoni premium, mozzarella, molho de tomate e um toque de orégano fresco.
+                            </p>
+<button class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-2.5 rounded-full hover:bg-primary-container transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-sm fill-icon" data-icon="add_shopping_cart">add_shopping_cart</span>
+                                Adicionar
+                            </button>
+</div>
+</div>
+<!-- Pizza Card 3 -->
+<div class="bg-surface rounded-2xl overflow-hidden shadow-ambient hover:shadow-ambient-hover transition-all duration-300 transform hover:-translate-y-1">
+<div class="absolute top-4 left-4 bg-secondary/10 text-secondary border border-secondary/20 font-label-sm text-label-sm px-3 py-1 rounded-full font-bold z-10 backdrop-blur-sm">
+                            Vegetariana
+                        </div>
+<img class="w-full h-48 object-cover" data-alt="A gourmet vegetarian pizza topped with roasted zucchini, bell peppers, red onions, black olives, and fresh arugula. Beautifully composed on a thin artisanal crust, sitting on a marble countertop in a bright, modern light-mode environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmSIxLcXEQckXz7fFkDn-9khr3l9-T1vhm0tiqnI7gW4JCeSnVc_LIyHWqTmP07cuCJF1umajJk93kUaBTTxQgS08hJqJa31ZXb14_3P3br4sqzIh1Zb5t8rrYaugGrKD_wiZIvxUYg4nBF1mj1J-A4HKEFW2DSpmf1f59tyQyJCVCJA5_k1tBC8f1WIPhEcQWMSQcu_OpJi4bkuorYMy3TKYJSW6ERXrryqD6YqT5ea1I8XXxcMd5nA">
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-primary text-xl">Jardim Capivara</h3>
+<span class="font-label-lg text-label-lg text-secondary font-bold">R$ 52</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 h-12 overflow-hidden">
+                                Abobrinha grelhada, pimentões confitados, cebola roxa, azeitonas e rúcula fresca.
+                            </p>
+<button class="w-full bg-primary/10 text-primary font-label-lg text-label-lg py-2.5 rounded-full hover:bg-primary/20 transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add_shopping_cart">add_shopping_cart</span>
+                                Adicionar
+                            </button>
+</div>
+</div>
+</div>
+<div class="text-center mt-stack-md">
+<a class="inline-flex items-center gap-2 text-primary font-label-lg text-label-lg hover:underline underline-offset-4" href="#">
+                        Ver cardápio completo
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-surface-container-highest dark:bg-surface-container-lowest">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="md:col-span-1 space-y-4">
+<a class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim font-bold flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity" href="#">
+                    Ramir's Pizzeria
+                </a>
+<p class="font-body-md text-body-md text-on-surface-variant">Muita diversão, capivara de montão!</p>
+</div>
+<div class="md:col-span-3 flex flex-col md:flex-row justify-end gap-stack-lg md:gap-gutter">
+<nav class="flex flex-col md:flex-row gap-4 md:gap-gutter">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors hover:underline font-label-sm text-label-sm" href="#">Contato</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors hover:underline font-label-sm text-label-sm" href="#">Localização</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors hover:underline font-label-sm text-label-sm" href="#">Privacidade</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors hover:underline font-label-sm text-label-sm" href="#">Termos</a>
+</nav>
+</div>
+<div class="col-span-1 md:col-span-4 mt-8 pt-8 border-t border-outline-variant/30 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2026 Ramir's Pizzeria - Muita diversão, capivara de montão!</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="language">language</span>
+</div>
+</div>
+</div>
+</footer>
+
+
+</body></html>

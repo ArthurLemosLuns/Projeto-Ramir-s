@@ -1,0 +1,254 @@
+<!DOCTYPE html><html lang="pt-BR" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Ramir's Pizzeria - Delivery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#41493e",
+                        "primary": "#00450d",
+                        "tertiary-fixed-dim": "#fabd00",
+                        "on-secondary-fixed": "#0f2000",
+                        "inverse-surface": "#2c3228",
+                        "primary-fixed": "#acf4a4",
+                        "surface-container-low": "#eff6e7",
+                        "outline": "#717a6d",
+                        "surface-container-highest": "#dee5d6",
+                        "on-secondary-container": "#437000",
+                        "on-error": "#ffffff",
+                        "tertiary": "#4c3700",
+                        "on-secondary-fixed-variant": "#2e4f00",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#1b5e20",
+                        "on-tertiary-fixed": "#261a00",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#90d689",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "primary-fixed-dim": "#91d78a",
+                        "surface-container": "#e9f0e1",
+                        "on-primary-fixed": "#002203",
+                        "surface-tint": "#2a6b2c",
+                        "tertiary-container": "#694d00",
+                        "tertiary-fixed": "#ffdf9e",
+                        "inverse-primary": "#91d78a",
+                        "secondary-fixed": "#b9f474",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f5fced",
+                        "surface": "#f5fced",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e3ebdc",
+                        "background": "#f5fced",
+                        "outline-variant": "#c0c9bb",
+                        "on-tertiary-container": "#f8bb00",
+                        "on-primary-fixed-variant": "#0c5216",
+                        "surface-variant": "#dee5d6",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#3e6a00",
+                        "secondary-container": "#b9f474",
+                        "on-background": "#171d14",
+                        "surface-dim": "#d5dcce",
+                        "on-surface": "#171d14",
+                        "inverse-on-surface": "#ecf3e4",
+                        "secondary-fixed-dim": "#9ed75b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1200px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "unit": "8px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-lg": ["Be Vietnam Pro"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #F1F8E9; /* Using standard tailwind classes where possible, falling back to specific design requirements if needed, though background is defined in theme as f5fced (surface) */
+        }
+        .soft-shadow {
+            box-shadow: 0 4px 20px rgba(0, 69, 13, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface/90 backdrop-blur-md fixed top-0 w-full z-50 shadow-sm">
+<div class="flex justify-between items-center px-margin-mobile h-20 pr-2">
+<div class="flex items-center gap-4">
+<img alt="Ramir's capybara mascot logo" class="h-12 w-12 object-contain rounded-full bg-surface-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD266rwa5v8tqelOodBwzTND9biAq3tDyGOfnRLm3AD6QKxzhLNcPjSZo4w5FzrMRtYHi-CcPWE6Lla5RJCFY8KTniVGJ6Et-oTRJUuSE-DTVG9rrOU946ssFCF5kDokUMejhMVTQ2jJquh0vWP4td-lBjlF3RRF8dJV8_QPinqjtKLTFmDbrfIi3QS6DxkuRjI4wQDU0BQF8NVMUo8yTE5UvIvjLGTcQqiHLSmqxwGnZi2qBvoiYvTxXYjT6S4Px7U2SQ">
+<span class="font-headline-md text-headline-md text-primary font-bold tracking-tight">Ramir's Pizzeria</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors hover:bg-primary-container/10 rounded-lg px-4 py-2" href="#">Início</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors hover:bg-primary-container/10 rounded-lg px-4 py-2" href="#">Cardápio</a>
+<a class="font-label-lg text-label-lg text-primary border-b-2 border-primary pb-1 font-bold" href="#">Delivery</a>
+</div>
+<div>
+<button class="bg-primary text-on-primary font-label-lg text-label-lg px-6 py-2 rounded-full hover:bg-primary-container transition-colors scale-95 active:scale-90 shadow-sm">
+                    Entrar
+                </button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-[104px] pb-margin-desktop px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Menu Selection -->
+<div class="lg:col-span-8 space-y-stack-lg">
+<!-- Delivery Status Banner -->
+<div class="bg-surface-container-low rounded-xl p-6 soft-shadow flex items-center justify-between">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary mb-2">Muita diversão, capivara de montão!</h2>
+<p class="text-on-surface-variant font-body-md">Sua pizza está a caminho da diversão! Estimativa: 35-45 min</p>
+</div>
+<div class="h-16 w-16 bg-primary-container/20 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="local_pizza">local_pizza</span>
+</div>
+</div>
+<!-- Menu Grid -->
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-stack-md">Adicionar mais itens</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<!-- Pizza Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 soft-shadow hover:-translate-y-1 transition-transform duration-300 flex flex-col">
+<div class="h-48 w-full rounded-lg mb-4 bg-surface-container flex-shrink-0 relative overflow-hidden">
+<img class="object-cover w-full h-full" data-alt="A mouth-watering, close-up shot of a classic Margherita pizza with fresh basil leaves, bubbling mozzarella cheese, and rich tomato sauce on a rustic wooden board. The lighting is warm and inviting, highlighting the crispy crust. The overall aesthetic is professional food photography, appetizing and natural." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsUatF22c_2akiow9roEUX40jgdl-qxkaINFFUJ2NJfbYMIzuY8NdTPMJ4jucHJF-gz9hDflmi2ZJgWrA1kfaHmWhWLYJt_f8JUHEqjES-uiT_np3rslV3jgJfsdBzD1lhx9rJ1mOdF_8PHe2Rlrp0Ks3Xz_ocGCv-y3PHE3jYzn4pSvBfdFvlmrnPdx_243q4OY5EeWWEV8odE5EmSPE1E6ej0-7K7nF_3fnpypuFldodB_jBjss_9g">
+<span class="absolute top-2 right-2 bg-secondary/10 text-secondary font-label-sm px-2 py-1 rounded-full backdrop-blur-sm">Vegetariano</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-primary mb-2">Margherita Capivara</h4>
+<p class="text-on-surface-variant font-body-md mb-4 flex-grow">Mussarela, tomate fresco, manjericão e um toque de azeite.</p>
+<div class="flex justify-between items-center mt-auto">
+<span class="font-headline-md text-headline-md text-primary">R$ 55,00</span>
+<button class="bg-primary text-on-primary rounded-full p-2 hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<!-- Pizza Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 soft-shadow hover:-translate-y-1 transition-transform duration-300 flex flex-col">
+<div class="h-48 w-full rounded-lg mb-4 bg-surface-container flex-shrink-0 relative overflow-hidden">
+<img class="object-cover w-full h-full" data-alt="A delicious pepperoni pizza loaded with spicy pepperoni slices and melted cheese, slightly charred edges on the crust, presented on a dark slate background. Warm, appetizing lighting emphasizing the savory textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA81YvJVeTO7_BFFaLojU7k4g1rd7PtOK6G7yQqtmRK2S7PiTwJVRp3eIQt-qITwFY3vhX3ObQr5FeeV-zglNlb3rY8fkK3qLXYGrBio6j1zgX7vdUw_VKsaDSJFnYwK19F4olwqVGxx_G0OQRfiwMJIRVKbovnNcrkfpywmuAQ9tDl1kYldsXHKz-Shu92VwGnOlFdSvhMlMNSjs-HJ9JTUWEhbF4l64OntzLfAXTO4GPfvg_pRP4qng">
+</div>
+<h4 class="font-headline-md text-headline-md text-primary mb-2">Pepperoni Supremo</h4>
+<p class="text-on-surface-variant font-body-md mb-4 flex-grow">Mussarela, pepperoni duplo, cebola roxa e orégano.</p>
+<div class="flex justify-between items-center mt-auto">
+<span class="font-headline-md text-headline-md text-primary">R$ 62,00</span>
+<button class="bg-primary text-on-primary rounded-full p-2 hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Cart & Details -->
+<div class="lg:col-span-4">
+<div class="bg-surface-container-lowest rounded-xl p-6 soft-shadow sticky top-[104px]">
+<h3 class="font-headline-md text-headline-md text-primary mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span> Seu Carrinho
+                </h3>
+<!-- Cart Items -->
+<div class="space-y-4 mb-stack-lg">
+<div class="flex justify-between items-start border-b border-surface-variant pb-4">
+<div>
+<p class="font-label-lg text-label-lg text-primary">1x Calabresa Rústica</p>
+<p class="text-label-sm text-on-surface-variant">Borda recheada</p>
+</div>
+<p class="font-label-lg text-label-lg text-primary">R$ 58,00</p>
+</div>
+<div class="flex justify-between items-start border-b border-surface-variant pb-4">
+<div>
+<p class="font-label-lg text-label-lg text-primary">2x Guaraná 1L</p>
+</div>
+<p class="font-label-lg text-label-lg text-primary">R$ 24,00</p>
+</div>
+</div>
+<!-- Totals -->
+<div class="space-y-2 mb-stack-lg">
+<div class="flex justify-between text-body-md text-on-surface-variant">
+<span class="">Subtotal</span>
+<span class="">R$ 82,00</span>
+</div>
+<div class="flex justify-between text-body-md text-on-surface-variant">
+<span class="">Taxa de Entrega</span>
+<span class="">R$ 8,00</span>
+</div>
+<div class="flex justify-between font-headline-md text-headline-md text-primary pt-2 border-t border-surface-variant">
+<span class="">Total</span>
+<span class="">R$ 90,00</span>
+</div>
+</div>
+<!-- Delivery Details Form -->
+<h4 class="font-label-lg text-label-lg text-primary mb-2">Detalhes da Entrega</h4>
+<div class="space-y-3 mb-stack-lg">
+<input class="w-full bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-body-md p-3" placeholder="Rua, Número, Bairro" type="text">
+<input class="w-full bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-body-md p-3" placeholder="Complemento (Opcional)" type="text">
+</div>
+<button class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-full hover:bg-primary-container transition-colors shadow-sm">
+                    Finalizar Pedido
+                </button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest w-full py-12 mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="md:col-span-2">
+<span class="font-headline-md text-headline-md text-primary font-bold block mb-4">Ramir's Pizzeria</span>
+<p class="font-body-md text-on-surface-variant opacity-80 hover:opacity-100 transition-opacity">© 2026 Ramir's Pizzeria - Muita diversão, capivara de montão!.</p>
+</div>
+<div>
+<ul class="space-y-2">
+<li class=""><a class="font-body-md text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Contato</a></li>
+<li class=""><a class="font-body-md text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Localização</a></li>
+</ul>
+</div>
+<div>
+<ul class="space-y-2">
+<li class=""><a class="font-body-md text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Privacidade</a></li>
+<li class=""><a class="font-body-md text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Termos</a></li>
+</ul>
+</div>
+</div>
+</footer>
+
+
+</body></html>

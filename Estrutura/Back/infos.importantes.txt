@@ -22,3 +22,4 @@ Por o logout, pois após as mudanças no commit que fez aparecer o "Olá [nome]"
 
 Fazer mudança nas fotos das bebidas, pegue urls e peça para a IA usa-los corretamente, para que seja mais prático do que apenas pedir para ela caçar
 
+teste por falha no commit

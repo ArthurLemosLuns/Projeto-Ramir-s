@@ -128,12 +128,12 @@
     <nav class="hidden md:flex gap-gutter items-center justify-center">
         <a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim pb-1 font-bold font-label-lg text-label-lg" href="home.html">Início</a>
         <a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-label-lg text-label-lg" href="cardapio.html">Cardápio</a>
-        <a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-label-lg text-label-lg" href="delivery.html">Delivery</a>
+        <a id="delivery-link" class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-label-lg text-label-lg cursor-pointer" href="delivery.html">Delivery</a>
     </nav>
     <div class="flex-1 flex justify-end items-center">
-        <a href="login.html" class="bg-primary text-on-primary font-label-lg text-label-lg px-6 py-2.5 rounded-full hover:bg-primary-container/90 transition-all duration-200 shadow-ambient hover:shadow-ambient-hover scale-95 active:scale-90 flex items-center gap-2">
-            <span class="material-symbols-outlined fill-icon text-lg">login</span>
-            Entrar
+        <a id="auth-btn" href="login.html" class="bg-primary text-on-primary font-label-lg text-label-lg px-6 py-2.5 rounded-full hover:bg-primary-container/90 transition-all duration-200 shadow-ambient hover:shadow-ambient-hover scale-95 active:scale-90 flex items-center gap-2">
+            <span id="auth-icon" class="material-symbols-outlined fill-icon text-lg">login</span>
+            <span id="auth-text">Entrar</span>
         </a>
     </div>
 </div></div>
@@ -154,7 +154,7 @@
 <h1 class="font-display-lg text-display-lg text-primary md:leading-tight">A Festa Mais Relaxante da Cidade!</h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">Junte sua galera para a melhor experiência de pizza da região! Aqui, a diversão das capivaras encontra o sabor artesanal em um ambiente feito para você rir, relaxar e criar memórias inesquecíveis.</p>
 <div class="pt-stack-sm flex flex-wrap gap-4">
-        <a href="delivery.html" class="bg-primary text-on-primary font-label-lg text-label-lg px-8 py-3.5 rounded-full hover:bg-primary-container transition-colors shadow-ambient hover:shadow-ambient-hover flex items-center gap-2">
+        <a id="delivery-cta" href="delivery.html" class="bg-primary text-on-primary font-label-lg text-label-lg px-8 py-3.5 rounded-full hover:bg-primary-container transition-colors shadow-ambient hover:shadow-ambient-hover flex items-center gap-2">
             <span class="material-symbols-outlined fill-icon" data-icon="shopping_basket">shopping_basket</span>
                                 Fazer Pedido
                             </a>
@@ -280,6 +280,18 @@
 </div>
 </section>
 </main>
+<!-- Login Required Modal -->
+<div id="login-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+<div class="absolute inset-0 bg-primary/40 backdrop-blur-sm"></div>
+<div class="relative bg-surface-container-lowest rounded-2xl shadow-ambient p-8 max-w-md w-full text-center">
+<span class="material-symbols-outlined text-error text-5xl mb-4" style="font-variation-settings: 'FILL' 1;">lock</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Acesso restrito</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Para pedir/acessar a seção de delivery, é necessário estar logado.</p>
+<button id="modal-back-btn" class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-full hover:bg-primary-container transition-colors shadow-ambient">
+Retornar a tela inicial
+</button>
+</div>
+</div>
 <!-- Footer -->
 <footer class="w-full py-12 bg-surface-container-highest dark:bg-surface-container-lowest">
 <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
@@ -306,5 +318,86 @@
 </div>
 </footer>
 
+<script>
+// ===== AUTENTICAÇÃO =====
+function isLoggedIn() {
+    return !!(localStorage.getItem('token') && localStorage.getItem('userName'));
+}
 
+function updateAuthButton() {
+    const authBtn = document.getElementById('auth-btn');
+    const authIcon = document.getElementById('auth-icon');
+    const authText = document.getElementById('auth-text');
+    const userName = localStorage.getItem('userName');
+
+    if (authBtn && isLoggedIn()) {
+        // Usuário logado: apenas texto de saudação, sem clique/navegação
+        authText.textContent = `Olá, ${userName}`;
+        authIcon.textContent = 'account_circle';
+        authBtn.removeAttribute('href');
+        authBtn.style.pointerEvents = 'none';
+        authBtn.style.cursor = 'default';
+        authBtn.classList.remove('hover:bg-primary-container/90', 'active:scale-90');
+    } else if (authBtn) {
+        authText.textContent = 'Entrar';
+        authIcon.textContent = 'login';
+        authBtn.setAttribute('href', 'login.html');
+        authBtn.style.pointerEvents = '';
+        authBtn.style.cursor = 'pointer';
+    }
+}
+
+function showLoginModal() {
+    const modal = document.getElementById('login-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function hideLoginModal() {
+    const modal = document.getElementById('login-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateAuthButton();
+
+    // Intercepta clique no link Delivery (nav e CTA)
+    const deliveryLinks = [
+        document.getElementById('delivery-link'),
+        document.getElementById('delivery-cta')
+    ];
+    deliveryLinks.forEach(link => {
+        if (link) {
+            link.addEventListener('click', (e) => {
+                if (!isLoggedIn()) {
+                    e.preventDefault();
+                    showLoginModal();
+                }
+            });
+        }
+    });
+
+    // Botão de retorno do modal
+    const modalBackBtn = document.getElementById('modal-back-btn');
+    if (modalBackBtn) {
+        modalBackBtn.addEventListener('click', () => {
+            hideLoginModal();
+            window.location.href = 'home.html';
+        });
+    }
+
+    // Fecha modal clicando fora
+    const modal = document.getElementById('login-modal');
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) hideLoginModal();
+        });
+    }
+});
+</script>
 </body></html>

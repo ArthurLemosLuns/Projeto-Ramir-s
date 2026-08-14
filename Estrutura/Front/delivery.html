@@ -127,8 +127,9 @@
 <a class="font-label-lg text-label-lg text-primary border-b-2 border-primary pb-1 font-bold" href="delivery.html">Delivery</a>
 </div>
 <div>
-<a href="login.html" class="bg-primary text-on-primary font-label-lg text-label-lg px-6 py-2 rounded-full hover:bg-primary-container transition-colors scale-95 active:scale-90 shadow-sm">
-                    Entrar
+<a id="auth-btn" href="login.html" class="bg-primary text-on-primary font-label-lg text-label-lg px-6 py-2 rounded-full hover:bg-primary-container transition-colors scale-95 active:scale-90 shadow-sm flex items-center gap-2">
+                    <span id="auth-icon" class="material-symbols-outlined fill-icon text-lg">login</span>
+                    <span id="auth-text">Entrar</span>
                 </a>
 </div>
 </div>
@@ -312,6 +313,18 @@
 </div>
 </div>
 </main>
+<!-- Login Required Modal -->
+<div id="login-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+<div class="absolute inset-0 bg-primary/40 backdrop-blur-sm"></div>
+<div class="relative bg-surface-container-lowest rounded-2xl shadow-ambient p-8 max-w-md w-full text-center">
+<span class="material-symbols-outlined text-error text-5xl mb-4" style="font-variation-settings: 'FILL' 1;">lock</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Acesso restrito</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Para pedir/acessar a seção de delivery, é necessário estar logado.</p>
+<button id="modal-back-btn" class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-full hover:bg-primary-container transition-colors shadow-ambient">
+Retornar a tela inicial
+</button>
+</div>
+</div>
 <!-- Footer -->
 <footer class="bg-surface-container-highest w-full py-12 mt-auto">
 <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
@@ -440,7 +453,67 @@ function showMessage(text, type) {
     }, 3000);
 }
 
+// ===== AUTENTICAÇÃO =====
+function isLoggedIn() {
+    return !!(localStorage.getItem('token') && localStorage.getItem('userName'));
+}
+
+function updateAuthButton() {
+    const authBtn = document.getElementById('auth-btn');
+    const authIcon = document.getElementById('auth-icon');
+    const authText = document.getElementById('auth-text');
+    const userName = localStorage.getItem('userName');
+
+    if (authBtn && isLoggedIn()) {
+        // Usuário logado: apenas texto de saudação, sem clique/navegação
+        authText.textContent = `Olá, ${userName}`;
+        authIcon.textContent = 'account_circle';
+        authBtn.removeAttribute('href');
+        authBtn.style.pointerEvents = 'none';
+        authBtn.style.cursor = 'default';
+        authBtn.classList.remove('hover:bg-primary-container/90', 'active:scale-90');
+    } else if (authBtn) {
+        authText.textContent = 'Entrar';
+        authIcon.textContent = 'login';
+        authBtn.setAttribute('href', 'login.html');
+        authBtn.style.pointerEvents = '';
+        authBtn.style.cursor = 'pointer';
+    }
+}
+
+function showLoginModal() {
+    const modal = document.getElementById('login-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function hideLoginModal() {
+    const modal = document.getElementById('login-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    updateAuthButton();
+
+    // Se não estiver logado ao acessar a página de delivery, bloqueia
+    if (!isLoggedIn()) {
+        showLoginModal();
+    }
+
+    // Botão de retorno do modal
+    const modalBackBtn = document.getElementById('modal-back-btn');
+    if (modalBackBtn) {
+        modalBackBtn.addEventListener('click', () => {
+            hideLoginModal();
+            window.location.href = 'home.html';
+        });
+    }
+
     // Event listeners para os botões de adicionar
     document.querySelectorAll('.add-item-btn').forEach(btn => {
         btn.addEventListener('click', () => {

@@ -241,10 +241,10 @@ const pizzaCategories = [
 ];
 
 const drinkSizes = {
-    '250ml': { price: 'R$ 6,90', brands: [ { name: 'Pepsi', flavors: ['Cola', 'Zero'] }, { name: 'Coca-Cola', flavors: ['Original', 'Zero'] }, { name: 'Fanta', flavors: ['Laranja', 'Uva'] }, { name: 'Guaraná Antarctica', flavors: ['Original', 'Zero'] } ] },
-    '500ml': { price: 'R$ 9,90', brands: [ { name: 'Pepsi', flavors: ['Cola', 'Limao'] }, { name: 'Coca-Cola', flavors: ['Original', 'Zero'] }, { name: 'Fanta', flavors: ['Laranja', 'Guaraná'] }, { name: 'Guaraná Antarctica', flavors: ['Original', 'Sem Açúcar'] } ] },
-    '1,5L': { price: 'R$ 14,90', brands: [ { name: 'Pepsi', flavors: ['Cola', 'Manga'] }, { name: 'Coca-Cola', flavors: ['Original', 'Zero'] }, { name: 'Fanta', flavors: ['Laranja', 'Uva'] }, { name: 'Guaraná Antarctica', flavors: ['Original', 'Zero'] } ] },
-    '2L': { price: 'R$ 18,90', brands: [ { name: 'Pepsi', flavors: ['Cola', 'Pêssego'] }, { name: 'Coca-Cola', flavors: ['Original', 'Zero'] }, { name: 'Fanta', flavors: ['Laranja', 'Manga'] }, { name: 'Guaraná Antarctica', flavors: ['Original', 'Sem Açúcar'] } ] }
+    '250ml': { price: 'R$ 6,90', brands: [ { name: 'Pepsi', flavors: ['Cola', 'Zero'] }, { name: 'Coca-Cola', flavors: ['Original', 'Zero'] }, { name: 'Fanta', flavors: ['Laranja', 'Uva', 'Guaraná', 'Guaraná Zero', 'Laranja Zero', 'Caju'] }, { name: 'Guaraná Antarctica', flavors: ['Original', 'Zero'] }, { name: 'Sucos Naturais', flavors: ['Laranja', 'Uva', 'Abacaxi com Hortelã', 'Manga', 'Acerola', 'Maracujá', 'Limão', 'Caju', 'Morango', 'Salada de Fruta', 'Jenipapo', 'Goiaba', 'Cajá', 'Açaí', 'Jaca'] }, { name: 'Vitaminas', flavors: ['Banana', 'Abacate', 'Cacau', 'Morango', 'Mamão', 'Frutas Vermelhas', 'Verde'] } ] },
+    '500ml': { price: 'R$ 9,90', brands: [ { name: 'Pepsi', flavors: ['Cola', 'Limao'] }, { name: 'Coca-Cola', flavors: ['Original', 'Zero'] }, { name: 'Fanta', flavors: ['Laranja', 'Guaraná', 'Guaraná Zero', 'Laranja Zero', 'Caju'] }, { name: 'Guaraná Antarctica', flavors: ['Original', 'Sem Açúcar'] }, { name: 'Sucos Naturais', flavors: ['Laranja', 'Uva', 'Abacaxi com Hortelã', 'Manga', 'Acerola', 'Maracujá', 'Limão', 'Caju', 'Morango', 'Salada de Fruta', 'Jenipapo', 'Goiaba', 'Cajá', 'Açaí', 'Jaca'] }, { name: 'Vitaminas', flavors: ['Banana', 'Abacate', 'Cacau', 'Morango', 'Mamão', 'Frutas Vermelhas', 'Verde'] } ] },
+    '1,5L': { price: 'R$ 14,90', brands: [ { name: 'Pepsi', flavors: ['Cola', 'Manga'] }, { name: 'Coca-Cola', flavors: ['Original', 'Zero'] }, { name: 'Fanta', flavors: ['Laranja', 'Uva', 'Guaraná', 'Guaraná Zero', 'Laranja Zero', 'Caju'] }, { name: 'Guaraná Antarctica', flavors: ['Original', 'Zero'] }, { name: 'Sucos Naturais', flavors: ['Laranja', 'Uva', 'Abacaxi com Hortelã', 'Manga', 'Acerola', 'Maracujá', 'Limão', 'Caju', 'Morango', 'Salada de Fruta', 'Jenipapo', 'Goiaba', 'Cajá', 'Açaí', 'Jaca'] }, { name: 'Vitaminas', flavors: ['Banana', 'Abacate', 'Cacau', 'Morango', 'Mamão', 'Frutas Vermelhas', 'Verde'] } ] },
+    '2L': { price: 'R$ 18,90', brands: [ { name: 'Pepsi', flavors: ['Cola', 'Pêssego'] }, { name: 'Coca-Cola', flavors: ['Original', 'Zero'] }, { name: 'Fanta', flavors: ['Laranja', 'Manga', 'Guaraná', 'Guaraná Zero', 'Laranja Zero', 'Caju'] }, { name: 'Guaraná Antarctica', flavors: ['Original', 'Sem Açúcar'] }, { name: 'Sucos Naturais', flavors: ['Laranja', 'Uva', 'Abacaxi com Hortelã', 'Manga', 'Acerola', 'Maracujá', 'Limão', 'Caju', 'Morango', 'Salada de Fruta', 'Jenipapo', 'Goiaba', 'Cajá', 'Açaí', 'Jaca'] }, { name: 'Vitaminas', flavors: ['Banana', 'Abacate', 'Cacau', 'Morango', 'Mamão', 'Frutas Vermelhas', 'Verde'] } ] }
 };
 
 // ===== FOTOS REAIS (do protótipo e Unsplash) =====
@@ -271,7 +271,9 @@ const drinkImages = {
     'Coca-Cola': 'https://images.unsplash.com/photo-1554866585-cd94860890b7?w=600',
     'Pepsi': 'https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=600',
     'Fanta': 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=600',
-    'Guaraná Antarctica': 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=600'
+    'Guaraná Antarctica': 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=600',
+    'Sucos Naturais': 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=600',
+    'Vitaminas': 'https://images.unsplash.com/photo-1610970881699-44a5587cabec?w=600'
 };
 
 let selectedDrinkSize = '500ml';

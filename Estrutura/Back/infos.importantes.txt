@@ -23,3 +23,5 @@ Adicionar opções de sucos, adicionar opções de outros sabores de Fanta
 Fazer mudança nas fotos das bebidas, pegue urls e peça para a IA usa-los corretamente, para que seja mais prático do que apenas pedir para ela caçar
 
 teste por falha no commit
+
+adição de opções de sucos, sendo eles: Laranja, Uva, Abacaxi com hortelã, Manga, Acerola, Maracujá, Limão, Caju, Morango, Salada de Fruta, Jenipapo, Goiaba, Cajá, Açaí, Jaca. Adicionar opções de outros sabores de Fanta, sendo eles: Guaraná, Guaraná Zero, Laranja Zero e Caju. Adicionar opções de vitamina, sendo eles: banana, abacate, cacau, morango, mamão, Frutas vermelhas, Verde.

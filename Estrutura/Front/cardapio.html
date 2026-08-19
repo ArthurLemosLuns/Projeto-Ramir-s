@@ -130,11 +130,15 @@
         <a class="text-primary border-b-2 border-primary pb-1 font-bold font-label-lg text-label-lg" href="cardapio.html">Cardápio</a>
         <a id="delivery-link" class="text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg cursor-pointer" href="delivery.html">Delivery</a>
     </nav>
-    <div class="flex-1 flex justify-end items-center">
+    <div class="flex-1 flex justify-end items-center gap-3">
         <a id="auth-btn" href="login.html" class="bg-primary text-on-primary font-label-lg text-label-lg px-6 py-2.5 rounded-full hover:bg-primary-container/90 transition-all duration-200 shadow-ambient scale-95 active:scale-90 flex items-center gap-2">
             <span id="auth-icon" class="material-symbols-outlined fill-icon text-lg">login</span>
             <span id="auth-text">Entrar</span>
         </a>
+        <button id="logout-btn" class="hidden bg-surface text-error font-label-lg text-label-lg px-4 py-2.5 rounded-full border-2 border-error hover:bg-error-container/10 transition-colors flex items-center gap-2">
+            <span class="material-symbols-outlined fill-icon text-lg">logout</span>
+            Sair
+        </button>
     </div>
 </div>
 </div>
@@ -175,6 +179,19 @@
 <button id="modal-back-btn" class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-full hover:bg-primary-container transition-colors shadow-ambient">
 Retornar a tela inicial
 </button>
+</div>
+</div>
+<!-- Logout Confirmation Modal -->
+<div id="logout-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+<div class="absolute inset-0 bg-primary/40 backdrop-blur-sm"></div>
+<div class="relative bg-surface-container-lowest rounded-2xl shadow-ambient p-8 max-w-md w-full text-center">
+<span class="material-symbols-outlined text-error text-5xl mb-4" style="font-variation-settings: 'FILL' 1;">logout</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Confirmar saída</h3>
+<p id="logout-message" class="font-body-md text-body-md text-on-surface-variant mb-6">Deseja mesmo sair de sua sessão?</p>
+<div class="flex gap-3">
+<button id="logout-confirm-btn" class="flex-1 bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-full hover:bg-primary-container transition-colors shadow-ambient">Sim</button>
+<button id="logout-cancel-btn" class="flex-1 bg-surface text-on-surface-variant font-label-lg text-label-lg py-3 rounded-full border-2 border-outline-variant hover:bg-surface-variant transition-colors">Não</button>
+</div>
 </div>
 </div>
 <!-- Footer Component -->
@@ -382,23 +399,51 @@ function updateAuthButton() {
     const authBtn = document.getElementById('auth-btn');
     const authIcon = document.getElementById('auth-icon');
     const authText = document.getElementById('auth-text');
+    const logoutBtn = document.getElementById('logout-btn');
     const userName = localStorage.getItem('userName');
 
     if (authBtn && isLoggedIn()) {
-        // Usuário logado: apenas texto de saudação, sem clique/navegação
+        // Usuário logado: texto de saudação + botão Sair
         authText.textContent = `Olá, ${userName}`;
         authIcon.textContent = 'account_circle';
         authBtn.removeAttribute('href');
         authBtn.style.pointerEvents = 'none';
         authBtn.style.cursor = 'default';
         authBtn.classList.remove('hover:bg-primary-container/90', 'active:scale-90');
+        if (logoutBtn) logoutBtn.classList.remove('hidden');
     } else if (authBtn) {
         authText.textContent = 'Entrar';
         authIcon.textContent = 'login';
         authBtn.setAttribute('href', 'login.html');
         authBtn.style.pointerEvents = '';
         authBtn.style.cursor = 'pointer';
+        if (logoutBtn) logoutBtn.classList.add('hidden');
     }
+}
+
+function showLogoutModal() {
+    const modal = document.getElementById('logout-modal');
+    const msg = document.getElementById('logout-message');
+    const userName = localStorage.getItem('userName');
+    if (modal) {
+        if (msg) msg.textContent = `Deseja mesmo sair de sua sessão, ${userName}?`;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function hideLogoutModal() {
+    const modal = document.getElementById('logout-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+}
+
+function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userName');
+    window.location.href = 'home.html';
 }
 
 function showLoginModal() {
@@ -451,6 +496,32 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modal) {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) hideLoginModal();
+        });
+    }
+
+    // Botão Sair - abre modal de confirmação
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', showLogoutModal);
+    }
+
+    // Confirmar logout
+    const logoutConfirmBtn = document.getElementById('logout-confirm-btn');
+    if (logoutConfirmBtn) {
+        logoutConfirmBtn.addEventListener('click', logout);
+    }
+
+    // Cancelar logout
+    const logoutCancelBtn = document.getElementById('logout-cancel-btn');
+    if (logoutCancelBtn) {
+        logoutCancelBtn.addEventListener('click', hideLogoutModal);
+    }
+
+    // Fecha modal de logout clicando fora
+    const logoutModal = document.getElementById('logout-modal');
+    if (logoutModal) {
+        logoutModal.addEventListener('click', (e) => {
+            if (e.target === logoutModal) hideLogoutModal();
         });
     }
 });

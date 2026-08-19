@@ -14,11 +14,11 @@ Colocar opção de selecionar mais de um produto no pedido, permitindo assim sel
 
 Fazer três páginas, sendo uma introdutória, cardápio e uma para o delivery.(feito)
 
+Por o logout, pois após as mudanças no commit que fez aparecer o "Olá [nome]" ser incluido, não é possível fazer o logout no site. O Logout pode ser nada mais, nada menos, que um botão que aparece ao lado de "Olá [nome]", desejo que seja apenas um "Sair", onde ao clicar, deve se confirmar novamente, pois quero que apareça uma informação na tela escrito "Deseja mesmo sair de sua sessão, [nome]?", com dois botões escritos "Sim" e "Não" aparecendo como meio de confirmação.(fEITO)
+
 Padronizar os preços da pizza por tamanho, e fazer colunas dos tamanhos com todas as pizzas do tamanho, mas dividida por salgada e doce
 
 Adicionar opções de sucos, adicionar opções de outros sabores de Fanta
-
-Por o logout, pois após as mudanças no commit que fez aparecer o "Olá [nome]" ser incluido, não é possível fazer o logout no site
 
 Fazer mudança nas fotos das bebidas, pegue urls e peça para a IA usa-los corretamente, para que seja mais prático do que apenas pedir para ela caçar
 

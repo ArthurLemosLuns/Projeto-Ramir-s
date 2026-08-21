@@ -129,6 +129,7 @@
         <a class="text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg" href="home.html">Início</a>
         <a class="text-primary border-b-2 border-primary pb-1 font-bold font-label-lg text-label-lg" href="cardapio.html">Cardápio</a>
         <a id="delivery-link" class="text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg cursor-pointer" href="delivery.html">Delivery</a>
+        <a id="admin-link" class="hidden text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg" href="admin.html">Painel Admin</a>
     </nav>
     <div class="flex-1 flex justify-end items-center gap-3">
         <a id="auth-btn" href="login.html" class="bg-primary text-on-primary font-label-lg text-label-lg px-6 py-2.5 rounded-full hover:bg-primary-container/90 transition-all duration-200 shadow-ambient scale-95 active:scale-90 flex items-center gap-2">
@@ -223,19 +224,19 @@ const pizzaCategories = [
     {
         title: 'Pizza salgada',
         sizes: [
-            { size: 'Pequena', items: [ { name: 'Margherita', description: 'Molho de tomate, mussarela e manjericão.', price: 'R$ 34,90' }, { name: 'Pepperoni', description: 'Pepperoni, mussarela e borda crocante.', price: 'R$ 39,90' } ] },
-            { size: 'Média', items: [ { name: 'Frango com Catupiry', description: 'Frango, catupiry e cebola crocante.', price: 'R$ 49,90' }, { name: 'Quatro Queijos', description: 'Mussarela, provolone, gorgonzola e parmesão.', price: 'R$ 52,90' } ] },
-            { size: 'Grande', items: [ { name: 'Calabresa Especial', description: 'Calabresa, cebola e queijo derretido.', price: 'R$ 59,90' }, { name: 'Vegetariana', description: 'Tomate, abobrinha, pimentão e champignon.', price: 'R$ 57,90' } ] },
-            { size: 'Família', items: [ { name: 'Bacon com Cebola', description: 'Bacon, cebola caramelizada e queijo premium.', price: 'R$ 69,90' }, { name: 'Mussarela Especial', description: 'Mussarela generosa e molho artesanal.', price: 'R$ 66,90' } ] }
+            { size: 'Pequena', items: [ { name: 'Margherita', description: 'Molho de tomate, mussarela e manjericão.', price: 'R$ 34,00' }, { name: 'Pepperoni', description: 'Pepperoni, mussarela e borda crocante.', price: 'R$ 34,00' } ] },
+            { size: 'Média', items: [ { name: 'Frango com Catupiry', description: 'Frango, catupiry e cebola crocante.', price: 'R$ 45,00' }, { name: 'Quatro Queijos', description: 'Mussarela, provolone, gorgonzola e parmesão.', price: 'R$ 45,00' } ] },
+            { size: 'Grande', items: [ { name: 'Calabresa Especial', description: 'Calabresa, cebola e queijo derretido.', price: 'R$ 69,00' }, { name: 'Vegetariana', description: 'Tomate, abobrinha, pimentão e champignon.', price: 'R$ 69,00' } ] },
+            { size: 'Família', items: [ { name: 'Bacon com Cebola', description: 'Bacon, cebola caramelizada e queijo premium.', price: 'R$ 84,00' }, { name: 'Mussarela Especial', description: 'Mussarela generosa e molho artesanal.', price: 'R$ 84,00' } ] }
         ]
     },
     {
         title: 'Pizza doce',
         sizes: [
-            { size: 'Pequena', items: [ { name: 'Chocolate com Morango', description: 'Chocolate ao leite e morangos frescos.', price: 'R$ 36,90' }, { name: 'Romeu e Julieta', description: 'Queijo minas com goiabada.', price: 'R$ 34,90' } ] },
-            { size: 'Média', items: [ { name: 'Banoffee', description: 'Banana, doce de leite e chocolate.', price: 'R$ 46,90' }, { name: 'Prestígio', description: 'Chocolate, coco e raspas de chocolate.', price: 'R$ 44,90' } ] },
-            { size: 'Grande', items: [ { name: 'Nutella com Banana', description: 'Nutella, banana e castanhas.', price: 'R$ 56,90' }, { name: 'Brigadeiro', description: 'Brigadeiro e granulado crocante.', price: 'R$ 54,90' } ] },
-            { size: 'Família', items: [ { name: 'Sensação', description: 'Chocolate, morango e creme.', price: 'R$ 64,90' }, { name: 'Confetti', description: 'Chocolate, confete e creme de leite.', price: 'R$ 62,90' } ] }
+            { size: 'Pequena', items: [ { name: 'Chocolate com Morango', description: 'Chocolate ao leite e morangos frescos.', price: 'R$ 34,00' }, { name: 'Romeu e Julieta', description: 'Queijo minas com goiabada.', price: 'R$ 34,00' } ] },
+            { size: 'Média', items: [ { name: 'Banoffee', description: 'Banana, doce de leite e chocolate.', price: 'R$ 45,00' }, { name: 'Prestígio', description: 'Chocolate, coco e raspas de chocolate.', price: 'R$ 45,00' } ] },
+            { size: 'Grande', items: [ { name: 'Nutella com Banana', description: 'Nutella, banana e castanhas.', price: 'R$ 69,00' }, { name: 'Brigadeiro', description: 'Brigadeiro e granulado crocante.', price: 'R$ 69,00' } ] },
+            { size: 'Família', items: [ { name: 'Sensação', description: 'Chocolate, morango e creme.', price: 'R$ 84,00' }, { name: 'Confetti', description: 'Chocolate, confete e creme de leite.', price: 'R$ 84,00' } ] }
         ]
     }
 ];
@@ -472,6 +473,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     updateAuthButton();
+
+    // Mostra o link do Painel Admin apenas para administradores
+    if (localStorage.getItem('userRole') === 'admin') {
+        const adminLink = document.getElementById('admin-link');
+        if (adminLink) adminLink.classList.remove('hidden');
+    }
 
     // Intercepta clique no link Delivery
     const deliveryLink = document.getElementById('delivery-link');

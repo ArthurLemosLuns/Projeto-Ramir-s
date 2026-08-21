@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Painel Administrativo - Ramir's Pizzeria</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#41493e",
+                        "primary": "#00450d",
+                        "tertiary-fixed-dim": "#fabd00",
+                        "on-secondary-fixed": "#0f2000",
+                        "inverse-surface": "#2c3228",
+                        "primary-fixed": "#acf4a4",
+                        "surface-container-low": "#eff6e7",
+                        "outline": "#717a6d",
+                        "surface-container-highest": "#dee5d6",
+                        "on-secondary-container": "#437000",
+                        "on-error": "#ffffff",
+                        "tertiary": "#4c3700",
+                        "on-secondary-fixed-variant": "#2e4f00",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#1b5e20",
+                        "on-tertiary-fixed": "#261a00",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#90d689",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "primary-fixed-dim": "#91d78a",
+                        "surface-container": "#e9f0e1",
+                        "on-primary-fixed": "#002203",
+                        "surface-tint": "#2a6b2c",
+                        "tertiary-container": "#694d00",
+                        "tertiary-fixed": "#ffdf9e",
+                        "inverse-primary": "#91d78a",
+                        "secondary-fixed": "#b9f474",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f5fced",
+                        "surface": "#f5fced",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e3ebdc",
+                        "background": "#f5fced",
+                        "outline-variant": "#c0c9bb",
+                        "on-tertiary-container": "#f8bb00",
+                        "on-primary-fixed-variant": "#0c5216",
+                        "surface-variant": "#dee5d6",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#3e6a00",
+                        "secondary-container": "#b9f474",
+                        "on-background": "#171d14",
+                        "surface-dim": "#d5dcce",
+                        "on-surface": "#171d14",
+                        "inverse-on-surface": "#ecf3e4",
+                        "secondary-fixed-dim": "#9ed75b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1200px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "unit": "8px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-lg": ["Be Vietnam Pro"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    },
+                    "boxShadow": {
+                        "ambient": "0 4px 20px -2px rgba(0, 69, 13, 0.08)",
+                        "ambient-hover": "0 10px 25px -4px rgba(0, 69, 13, 0.12)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .soft-shadow { box-shadow: 0 4px 20px rgba(0, 69, 13, 0.06); }
+        .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0, 69, 13, 0.08); }
+        .order-tooltip { display: none; }
+        .order-card:hover .order-tooltip,
+        .order-card:focus-within .order-tooltip { display: block; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface/90 backdrop-blur-md fixed top-0 w-full z-50 shadow-sm">
+<div class="flex justify-between items-center px-margin-mobile h-20 pr-2">
+<div class="flex items-center gap-4">
+<a href="home.html">
+<img alt="Ramir's capybara mascot logo" class="h-12 w-12 object-contain rounded-full bg-surface-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD266rwa5v8tqelOodBwzTND9biAq3tDyGOfnRLm3AD6QKxzhLNcPjSZo4w5FzrMRtYHi-CcPWE6Lla5RJCFY8KTniVGJ6Et-oTRJUuSE-DTVG9rrOU946ssFCF5kDokUMejhMVTQ2jJquh0vWP4td-lBjlF3RRF8dJV8_QPinqjtKLTFmDbrfIi3QS6DxkuRjI4wQDU0BQF8NVMUo8yTE5UvIvjLGTcQqiHLSmqxwGnZi2qBvoiYvTxXYjT6S4Px7U2SQ">
+</a>
+<span class="font-headline-md text-headline-md text-primary font-bold tracking-tight">Ramir's Pizzeria</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors hover:bg-primary-container/10 rounded-lg px-4 py-2" href="home.html">Início</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors hover:bg-primary-container/10 rounded-lg px-4 py-2" href="cardapio.html">Cardápio</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors hover:bg-primary-container/10 rounded-lg px-4 py-2" href="delivery.html">Delivery</a>
+<a class="font-label-lg text-label-lg text-primary border-b-2 border-primary pb-1 font-bold" href="admin.html">Painel Admin</a>
+</div>
+<div class="flex items-center gap-3">
+<a id="auth-btn" href="login.html" class="bg-primary text-on-primary font-label-lg text-label-lg px-6 py-2 rounded-full hover:bg-primary-container transition-colors scale-95 active:scale-90 shadow-sm flex items-center gap-2">
+                    <span id="auth-icon" class="material-symbols-outlined fill-icon text-lg">login</span>
+                    <span id="auth-text">Entrar</span>
+                </a>
+<button id="logout-btn" class="hidden bg-surface text-error font-label-lg text-label-lg px-4 py-2 rounded-full border-2 border-error hover:bg-error-container/10 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined fill-icon text-lg">logout</span>
+Sair
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-[104px] pb-margin-desktop px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full space-y-stack-lg">
+<!-- Page Header -->
+<header class="text-center mb-stack-md">
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Painel Administrativo</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Acompanhe os pedidos e o estoque da Ramir's. Muita diversão, capivara de montão!</p>
+</header>
+
+<!-- ===== ESTATÍSTICAS DE PEDIDOS ===== -->
+<section>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="bg-surface-container-lowest rounded-xl p-6 soft-shadow hover-lift border border-outline-variant/40">
+<div class="flex items-center justify-between mb-2">
+<span class="material-symbols-outlined fill-icon text-primary text-3xl">receipt_long</span>
+<span class="font-display-lg text-display-lg text-primary" id="stat-total">0</span>
+</div>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Total de Pedidos</p>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 soft-shadow hover-lift border border-outline-variant/40">
+<div class="flex items-center justify-between mb-2">
+<span class="material-symbols-outlined fill-icon text-tertiary text-3xl">skillet</span>
+<span class="font-display-lg text-display-lg text-tertiary" id="stat-preparando">0</span>
+</div>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Sendo preparados</p>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 soft-shadow hover-lift border border-outline-variant/40">
+<div class="flex items-center justify-between mb-2">
+<span class="material-symbols-outlined fill-icon text-secondary text-3xl">local_shipping</span>
+<span class="font-display-lg text-display-lg text-secondary" id="stat-mandados">0</span>
+</div>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Mandados</p>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 soft-shadow hover-lift border border-outline-variant/40">
+<div class="flex items-center justify-between mb-2">
+<span class="material-symbols-outlined fill-icon text-primary text-3xl">task_alt</span>
+<span class="font-display-lg text-display-lg text-primary" id="stat-entregues">0</span>
+</div>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Entregues</p>
+</div>
+</div>
+</section>
+
+<!-- ===== PEDIDOS ===== -->
+<section class="bg-surface-container-lowest rounded-xl p-6 soft-shadow">
+<div class="flex justify-between items-center mb-stack-md">
+<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined fill-icon">list_alt</span> Pedidos
+                </h3>
+<button id="btn-refresh-orders" class="bg-primary/10 text-primary font-label-lg text-label-lg px-4 py-2 rounded-full hover:bg-primary/20 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-base">refresh</span> Atualizar
+                </button>
+</div>
+<div id="orders-feedback" class="mb-3"></div>
+<div id="orders-list" class="space-y-4"></div>
+</section>
+
+<!-- ===== ESTOQUE ===== -->
+<section class="bg-surface-container-lowest rounded-xl p-6 soft-shadow">
+<h3 class="font-headline-md text-headline-md text-primary mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined fill-icon">inventory_2</span> Estoque de Produtos
+            </h3>
+<p class="text-on-surface-variant font-body-md mb-stack-md">Quantidade disponível por produto. Use os botões para ajustar.</p>
+<div id="stock-feedback" class="mb-3"></div>
+<div id="stock-list" class="space-y-stack-lg"></div>
+</section>
+</main>
+<!-- Access Restricted Modal -->
+<div id="access-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+<div class="absolute inset-0 bg-primary/40 backdrop-blur-sm"></div>
+<div class="relative bg-surface-container-lowest rounded-2xl shadow-ambient p-8 max-w-md w-full text-center">
+<span class="material-symbols-outlined text-error text-5xl mb-4" style="font-variation-settings: 'FILL' 1;">lock</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Acesso restrito</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Esta área é exclusiva para administradores. Faça login com a conta Admin.</p>
+<button id="access-back-btn" class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-full hover:bg-primary-container transition-colors shadow-ambient">
+Retornar a tela inicial
+</button>
+</div>
+</div>
+<!-- Logout Confirmation Modal -->
+<div id="logout-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+<div class="absolute inset-0 bg-primary/40 backdrop-blur-sm"></div>
+<div class="relative bg-surface-container-lowest rounded-2xl shadow-ambient p-8 max-w-md w-full text-center">
+<span class="material-symbols-outlined text-error text-5xl mb-4" style="font-variation-settings: 'FILL' 1;">logout</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Confirmar saída</h3>
+<p id="logout-message" class="font-body-md text-body-md text-on-surface-variant mb-6">Deseja mesmo sair de sua sessão?</p>
+<div class="flex gap-3">
+<button id="logout-confirm-btn" class="flex-1 bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-full hover:bg-primary-container transition-colors shadow-ambient">Sim</button>
+<button id="logout-cancel-btn" class="flex-1 bg-surface text-on-surface-variant font-label-lg text-label-lg py-3 rounded-full border-2 border-outline-variant hover:bg-surface-variant transition-colors">Não</button>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-highest w-full py-12 mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="md:col-span-2">
+<span class="font-headline-md text-headline-md text-primary font-bold block mb-4">Ramir's Pizzeria</span>
+<p class="font-body-md text-on-surface-variant opacity-80 hover:opacity-100 transition-opacity">© 2026 Ramir's Pizzeria - Muita diversão, capivara de montão!.</p>
+</div>
+<div>
+<ul class="space-y-2">
+<li class=""><a class="font-body-md text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Contato</a></li>
+<li class=""><a class="font-body-md text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Localização</a></li>
+</ul>
+</div>
+<div>
+<ul class="space-y-2">
+<li class=""><a class="font-body-md text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Privacidade</a></li>
+<li class=""><a class="font-body-md text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Termos</a></li>
+</ul>
+</div>
+</div>
+</footer>
+
+<script>
+// ===== CONFIGURAÇÃO =====
+const API_URL = 'http://localhost:3000/api';
+const ORDER_STATUSES = ['Sendo preparados', 'Mandados', 'Entregues'];
+
+const STATUS_BADGE_CLASSES = {
+    'Sendo preparados': 'bg-tertiary-fixed-dim text-on-tertiary-fixed',
+    'Mandados': 'bg-secondary-container text-on-secondary-container',
+    'Entregues': 'bg-primary-container text-on-primary'
+};
+
+// ===== UTILITÁRIOS =====
+function getAuthHeaders() {
+    return {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+    };
+}
+
+function escapeHtml(text) {
+    // Constrói a entidade numérica em tempo de execução (&#38; &#60; &#62; &#34; &#39;)
+    return String(text ?? '').replace(/[&<>"']/g, c => '&#' + c.charCodeAt(0) + ';');
+}
+
+function formatCurrency(value) {
+    return Number(value || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+
+function formatDateTime(sqlDate) {
+    if (!sqlDate) return '';
+    const [datePart, timePart] = String(sqlDate).split(' ');
+    const [y, m, d] = datePart.split('-');
+    const time = timePart ? timePart.slice(0, 5) : '';
+    return `${d}/${m}/${y}${time ? ' às ' + time : ''}`;
+}
+
+function showFeedback(containerId, text, type) {
+    const div = document.getElementById(containerId);
+    if (!div) return;
+    div.textContent = text;
+    div.style.padding = '0.75rem';
+    div.style.borderRadius = '0.5rem';
+    div.style.fontSize = '14px';
+    div.style.fontWeight = '600';
+    if (type === 'success') {
+        div.style.backgroundColor = 'rgba(185, 244, 116, 0.2)';
+        div.style.color = '#3e6a00';
+    } else {
+        div.style.backgroundColor = 'rgba(186, 26, 26, 0.1)';
+        div.style.color = '#93000a';
+    }
+    setTimeout(() => { div.textContent = ''; }, 3000);
+}
+
+// ===== CONTROLE DE ACESSO =====
+function isAdminLoggedIn() {
+    return !!localStorage.getItem('token') && localStorage.getItem('userRole') === 'admin';
+}
+
+function showAccessModal() {
+    const modal = document.getElementById('access-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function hideAccessModal() {
+    const modal = document.getElementById('access-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+}
+
+// ===== AUTENTICAÇÃO (visual do header) =====
+function updateAuthButton() {
+    const authBtn = document.getElementById('auth-btn');
+    const authIcon = document.getElementById('auth-icon');
+    const authText = document.getElementById('auth-text');
+    const logoutBtn = document.getElementById('logout-btn');
+    const userName = localStorage.getItem('userName');
+
+    if (authBtn && localStorage.getItem('token')) {
+        authText.textContent = `Olá, ${userName}`;
+        authIcon.textContent = 'account_circle';
+        authBtn.removeAttribute('href');
+        authBtn.style.pointerEvents = 'none';
+        authBtn.style.cursor = 'default';
+        authBtn.classList.remove('hover:bg-primary-container', 'active:scale-90');
+        if (logoutBtn) logoutBtn.classList.remove('hidden');
+    } else if (authBtn) {
+        authText.textContent = 'Entrar';
+        authIcon.textContent = 'login';
+        authBtn.setAttribute('href', 'login.html');
+        authBtn.style.pointerEvents = '';
+        authBtn.style.cursor = 'pointer';
+        if (logoutBtn) logoutBtn.classList.add('hidden');
+    }
+}
+
+function showLogoutModal() {
+    const modal = document.getElementById('logout-modal');
+    const msg = document.getElementById('logout-message');
+    const userName = localStorage.getItem('userName');
+    if (modal) {
+        if (msg) msg.textContent = `Deseja mesmo sair de sua sessão, ${userName}?`;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function hideLogoutModal() {
+    const modal = document.getElementById('logout-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+}
+
+function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userRole');
+    window.location.href = 'home.html';
+}
+
+// ===== PEDIDOS =====
+async function loadOrders() {
+    try {
+        const response = await fetch(`${API_URL}/admin/orders`, { headers: getAuthHeaders() });
+
+        if (response.status === 401 || response.status === 403) {
+            showAccessModal();
+            return;
+        }
+
+        const data = await response.json();
+        if (!response.ok) {
+            showFeedback('orders-feedback', data.message || 'Erro ao carregar pedidos.', 'error');
+            return;
+        }
+
+        // Estatísticas
+        document.getElementById('stat-total').textContent = data.stats.total;
+        document.getElementById('stat-preparando').textContent = data.stats['Sendo preparados'];
+        document.getElementById('stat-mandados').textContent = data.stats['Mandados'];
+        document.getElementById('stat-entregues').textContent = data.stats['Entregues'];
+
+        renderOrders(data.orders);
+    } catch (error) {
+        console.error('❌ Erro ao carregar pedidos:', error);
+        showFeedback('orders-feedback', 'Erro ao conectar com o servidor.', 'error');
+    }
+}
+
+function renderOrders(orders) {
+    const container = document.getElementById('orders-list');
+
+    if (!orders || orders.length === 0) {
+        container.innerHTML = `
+            <div class="text-center py-10 text-on-surface-variant">
+                <span class="material-symbols-outlined text-5xl mb-3 block">inbox</span>
+                <p class="font-body-lg">Nenhum pedido ainda. Faça um pedido na página de Delivery para vê-lo aqui!</p>
+            </div>`;
+        return;
+    }
+
+    container.innerHTML = orders.map(order => {
+        const itemsSummary = order.items.length > 0
+            ? order.items.slice(0, 2).map(i => `${escapeHtml(i.nome)} (${escapeHtml(i.tamanho)})`).join(', ')
+              + (order.items.length > 2 ? ` +${order.items.length - 2} item(ns)` : '')
+            : 'Sem itens registrados';
+
+        const itemsDetail = order.items.length > 0
+            ? order.items.map(i => `
+                <li class="flex justify-between gap-4 py-1 border-b border-outline-variant/30 last:border-0">
+                    <span>${escapeHtml(i.nome)} <span class="text-on-surface-variant">(${escapeHtml(i.tamanho)})</span></span>
+                    <span class="whitespace-nowrap">${formatCurrency(i.valor)}</span>
+                </li>`).join('')
+            : '<li>Sem itens registrados</li>';
+
+        const statusOptions = ORDER_STATUSES.map(s =>
+            `<option value="${s}" ${s === order.status ? 'selected' : ''}>${s}</option>`
+        ).join('');
+
+        return `
+            <article class="order-card relative bg-surface-container-low rounded-xl p-4 border border-outline-variant/40 cursor-help" tabindex="0">
+                <div class="flex flex-wrap justify-between items-start gap-3">
+                    <div class="min-w-0">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="font-headline-md text-headline-md text-primary">#${order.id}</span>
+                            <span class="inline-block px-2 py-0.5 rounded-full font-label-sm text-label-sm font-bold ${STATUS_BADGE_CLASSES[order.status] || 'bg-surface-variant text-on-surface'}">${escapeHtml(order.status)}</span>
+                        </div>
+                        <p class="font-label-sm text-label-sm text-on-surface-variant mt-1">${formatDateTime(order.created_at)}</p>
+                        <p class="font-body-md text-body-md text-on-surface-variant mt-1 truncate">${itemsSummary}</p>
+                    </div>
+                    <div class="flex items-center gap-3 shrink-0">
+                        <span class="font-headline-md text-headline-md text-tertiary">${formatCurrency(order.total)}</span>
+                        <label class="sr-only" for="status-${order.id}">Status do pedido</label>
+                        <select id="status-${order.id}" data-order-id="${order.id}"
+                            class="status-select bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-body-md p-2 cursor-pointer">
+                            ${statusOptions}
+                        </select>
+                    </div>
+                </div>
+                <!-- Tooltip com detalhes (aparece ao passar o cursor) -->
+                <div class="order-tooltip absolute z-50 left-4 right-4 top-full mt-2 bg-surface-container-lowest border border-outline-variant rounded-xl p-4 soft-shadow">
+                    <p class="font-label-lg text-label-lg text-primary mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-base">shopping_bag</span> Itens do pedido:</p>
+                    <ul class="font-body-md text-body-md text-on-surface mb-3">${itemsDetail}</ul>
+                    <p class="font-label-lg text-label-lg text-primary mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-base">person</span> Cliente:</p>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-2">${escapeHtml(order.customer_name)}</p>
+                    <p class="font-label-lg text-label-lg text-primary mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-base">home_pin</span> Endereço:</p>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-2">${escapeHtml(order.address)}</p>
+                    <p class="font-label-lg text-label-lg text-primary mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-base">sticky_note_2</span> Observações:</p>
+                    <p class="font-body-md text-body-md text-on-surface-variant">${order.note ? escapeHtml(order.note) : 'Sem observações.'}</p>
+                </div>
+            </article>`;
+    }).join('');
+
+    container.querySelectorAll('.status-select').forEach(select => {
+        select.addEventListener('change', () => {
+            updateOrderStatus(select.getAttribute('data-order-id'), select.value);
+        });
+    });
+}
+
+async function updateOrderStatus(orderId, status) {
+    try {
+        const response = await fetch(`${API_URL}/admin/orders/${orderId}/status`, {
+            method: 'PUT',
+            headers: getAuthHeaders(),
+            body: JSON.stringify({ status })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            showFeedback('orders-feedback', data.message, 'success');
+            await loadOrders();
+        } else {
+            showFeedback('orders-feedback', data.message || 'Erro ao atualizar status.', 'error');
+            await loadOrders();
+        }
+    } catch (error) {
+        console.error('❌ Erro ao atualizar status:', error);
+        showFeedback('orders-feedback', 'Erro ao conectar com o servidor.', 'error');
+    }
+}
+
+// ===== ESTOQUE =====
+async function loadStock() {
+    try {
+        const response = await fetch(`${API_URL}/admin/stock`, { headers: getAuthHeaders() });
+
+        if (response.status === 401 || response.status === 403) {
+            showAccessModal();
+            return;
+        }
+
+        const stock = await response.json();
+        if (!response.ok) {
+            showFeedback('stock-feedback', stock.message || 'Erro ao carregar estoque.', 'error');
+            return;
+        }
+
+        renderStock(stock);
+    } catch (error) {
+        console.error('❌ Erro ao carregar estoque:', error);
+        showFeedback('stock-feedback', 'Erro ao conectar com o servidor.', 'error');
+    }
+}
+
+function renderStock(stock) {
+    const container = document.getElementById('stock-list');
+
+    if (!stock || stock.length === 0) {
+        container.innerHTML = '<p class="text-on-surface-variant font-body-md text-center py-6">Estoque vazio.</p>';
+        return;
+    }
+
+    const bebidas = stock.filter(item => item.tipo === 'bebida');
+    const pizzas = stock.filter(item => item.tipo === 'pizza');
+
+    const buildGroup = (title, icon, items) => {
+        if (items.length === 0) return '';
+        const categories = [...new Set(items.map(i => i.categoria))];
+        const cards = categories.map(cat => {
+            const catItems = items.filter(i => i.categoria === cat);
+            const rows = catItems.map(item => `
+                <div class="flex justify-between items-center py-2 border-b border-outline-variant/30 last:border-0">
+                    <span class="font-body-md text-body-md text-on-surface">${escapeHtml(item.tamanho)}</span>
+                    <div class="flex items-center gap-2">
+                        <span class="font-label-lg text-label-lg text-primary min-w-[3rem] text-center">${item.quantidade} un.</span>
+                        <button class="stock-minus-btn w-8 h-8 rounded-full bg-surface border border-outline-variant text-on-surface-variant hover:bg-surface-variant transition-colors flex items-center justify-center"
+                            data-id="${item.id}" data-qty="${item.quantidade}" title="Diminuir 1">
+                            <span class="material-symbols-outlined text-base">remove</span>
+                        </button>
+                        <button class="stock-plus-btn w-8 h-8 rounded-full bg-primary text-on-primary hover:bg-primary-container transition-colors flex items-center justify-center"
+                            data-id="${item.id}" data-qty="${item.quantidade}" title="Aumentar 1">
+                            <span class="material-symbols-outlined text-base">add</span>
+                        </button>
+                    </div>
+                </div>`).join('');
+            return `
+                <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant/40">
+                    <h4 class="font-label-lg text-label-lg text-primary font-bold mb-2">${escapeHtml(cat)}</h4>
+                    ${rows}
+                </div>`;
+        }).join('');
+        return `
+            <div>
+                <h4 class="font-headline-md text-headline-md text-primary mb-stack-md flex items-center gap-2">
+                    <span class="material-symbols-outlined fill-icon">${icon}</span> ${title}
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">${cards}</div>
+            </div>`;
+    };
+
+    container.innerHTML =
+        buildGroup('Refrigerantes & Bebidas', 'local_drink', bebidas) +
+        buildGroup('Pizzas', 'local_pizza', pizzas);
+
+    container.querySelectorAll('.stock-plus-btn').forEach(btn => {
+        btn.addEventListener('click', () => adjustStock(btn.getAttribute('data-id'), parseInt(btn.getAttribute('data-qty')), 1));
+    });
+    container.querySelectorAll('.stock-minus-btn').forEach(btn => {
+        btn.addEventListener('click', () => adjustStock(btn.getAttribute('data-id'), parseInt(btn.getAttribute('data-qty')), -1));
+    });
+}
+
+async function adjustStock(id, currentQty, delta) {
+    const newQty = Math.max(0, currentQty + delta);
+    try {
+        const response = await fetch(`${API_URL}/admin/stock/${id}`, {
+            method: 'PUT',
+            headers: getAuthHeaders(),
+            body: JSON.stringify({ quantidade: newQty })
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            await loadStock();
+        } else {
+            showFeedback('stock-feedback', data.message || 'Erro ao ajustar estoque.', 'error');
+        }
+    } catch (error) {
+        console.error('❌ Erro ao ajustar estoque:', error);
+        showFeedback('stock-feedback', 'Erro ao conectar com o servidor.', 'error');
+    }
+}
+
+// ===== INICIALIZAÇÃO =====
+document.addEventListener('DOMContentLoaded', () => {
+    updateAuthButton();
+
+    // Controle de acesso: apenas administradores
+    if (!isAdminLoggedIn()) {
+        showAccessModal();
+    } else {
+        loadOrders();
+        loadStock();
+    }
+
+    // Botão de retorno do modal de acesso
+    const accessBackBtn = document.getElementById('access-back-btn');
+    if (accessBackBtn) {
+        accessBackBtn.addEventListener('click', () => {
+            hideAccessModal();
+            window.location.href = 'home.html';
+        });
+    }
+
+    // Atualizar pedidos manualmente
+    const refreshBtn = document.getElementById('btn-refresh-orders');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', async () => {
+            await loadOrders();
+            showFeedback('orders-feedback', 'Pedidos atualizados!', 'success');
+        });
+    }
+
+    // Botão Sair - abre modal de confirmação
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', showLogoutModal);
+    }
+
+    // Confirmar logout
+    const logoutConfirmBtn = document.getElementById('logout-confirm-btn');
+    if (logoutConfirmBtn) {
+        logoutConfirmBtn.addEventListener('click', logout);
+    }
+
+    // Cancelar logout
+    const logoutCancelBtn = document.getElementById('logout-cancel-btn');
+    if (logoutCancelBtn) {
+        logoutCancelBtn.addEventListener('click', hideLogoutModal);
+    }
+
+    // Fecha modal de logout clicando fora
+    const logoutModal = document.getElementById('logout-modal');
+    if (logoutModal) {
+        logoutModal.addEventListener('click', (e) => {
+            if (e.target === logoutModal) hideLogoutModal();
+        });
+    }
+});
+</script>
+</body>
+</html>

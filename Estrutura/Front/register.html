@@ -167,6 +167,13 @@
 </div>
 </div>
 <div class="space-y-1">
+<label for="username" class="font-label-lg text-label-lg text-primary block">Nome de usuário</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">badge</span>
+<input id="username" name="username" type="text" placeholder="Seu nome de usuário" class="w-full bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-body-md p-3 pl-10">
+</div>
+</div>
+<div class="space-y-1">
 <label for="email" class="font-label-lg text-label-lg text-primary block">Email</label>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">mail</span>
@@ -239,12 +246,18 @@ function showMessage(text, type) {
 document.getElementById('register-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const name = document.getElementById('name').value;
+    const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirm = document.getElementById('confirm').value;
 
-    if (!name || !email || !password || !confirm) {
+    if (!name || !username || !email || !password || !confirm) {
         showMessage('Preencha todos os campos.', 'error');
+        return;
+    }
+
+    if (username.trim().length < 3) {
+        showMessage('O nome de usuário deve ter no mínimo 3 caracteres!', 'error');
         return;
     }
 
@@ -262,7 +275,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
         const response = await fetch(`${API_URL}/auth/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password })
+            body: JSON.stringify({ name, username, email, password })
         });
 
         const data = await response.json();

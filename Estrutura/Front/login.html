@@ -160,10 +160,10 @@
 </div>
 <form id="login-form" class="space-y-4">
 <div class="space-y-1">
-<label for="email" class="font-label-lg text-label-lg text-primary block">Email</label>
+<label for="email" class="font-label-lg text-label-lg text-primary block">Email ou nome de usuário</label>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">mail</span>
-<input id="email" name="email" type="email" placeholder="seu@email.com" class="w-full bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-body-md p-3 pl-10">
+<input id="email" name="email" type="text" placeholder="seu@email.com ou seu_usuario" class="w-full bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-body-md p-3 pl-10">
 </div>
 </div>
 <div class="space-y-1">
@@ -245,8 +245,11 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         if (response.ok) {
             localStorage.setItem('token', data.token);
             localStorage.setItem('userName', data.user.name);
+            localStorage.setItem('userEmail', data.user.email || '');
+            localStorage.setItem('userRole', data.user.role || 'user');
             showMessage('Login realizado com sucesso! Redirecionando...', 'success');
-            setTimeout(() => { window.location.href = 'home.html'; }, 1000);
+            const isAdmin = data.user.role === 'admin';
+            setTimeout(() => { window.location.href = isAdmin ? 'admin.html' : 'home.html'; }, 1000);
         } else {
             showMessage(data.message || 'Erro ao fazer login.', 'error');
         }

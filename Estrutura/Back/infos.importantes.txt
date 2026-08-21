@@ -1,5 +1,9 @@
-email cadastrado: pato@gmail.com
-senha cadastrada: lacerda
+email cadastrado: alemosluns@gmail.com
+senha cadastrada: SENHASEGURA@69
+
+Email admin: admin@ramirs.com
+Nome admin: Admin
+Senha admin: Ramir's@admin
 
 {Informações do ultimo prompt que foi barrado:
 
@@ -16,12 +20,11 @@ Fazer três páginas, sendo uma introdutória, cardápio e uma para o delivery.(
 
 Por o logout, pois após as mudanças no commit que fez aparecer o "Olá [nome]" ser incluido, não é possível fazer o logout no site. O Logout pode ser nada mais, nada menos, que um botão que aparece ao lado de "Olá [nome]", desejo que seja apenas um "Sair", onde ao clicar, deve se confirmar novamente, pois quero que apareça uma informação na tela escrito "Deseja mesmo sair de sua sessão, [nome]?", com dois botões escritos "Sim" e "Não" aparecendo como meio de confirmação.(fEITO)
 
-Padronizar os preços da pizza por tamanho, e fazer colunas dos tamanhos com todas as pizzas do tamanho, mas dividida por salgada e doce
+adição de opções de sucos, sendo eles: Laranja, Uva, Abacaxi com hortelã, Manga, Acerola, Maracujá, Limão, Caju, Morango, Salada de Fruta, Jenipapo, Goiaba, Cajá, Açaí, Jaca. Adicionar opções de outros sabores de Fanta, sendo eles: Guaraná, Guaraná Zero, Laranja Zero e Caju. Adicionar opções de vitamina, sendo eles: banana, abacate, cacau, morango, mamão, Frutas vermelhas, Verde.(feito)
 
-Adicionar opções de sucos, adicionar opções de outros sabores de Fanta
+Padronizar os preços da pizza por tamanho, e fazer colunas dos tamanhos com todas as pizzas do tamanho, mas dividida por salgada e doce(feito - preços: Pequena R$34,00 / Média R$45,00 / Grande R$69,00 / Família R$84,00 padronizados em home, cardápio e delivery; delivery reorganizado em seções: Tipo → Tamanho → Sabores para pizzas e Tamanho → Marcas → Sabores para bebidas)
+
+Quero que faça uma conta de administrador(Nome:Admin. Senha:Ramir's@admin), onde pode por a adição de nome de usuário aos cadastros, não limitando a apenas email, e um painel de administrador, com quantidade dos podutos em estoque(mais direcionado para os refrigerantes. Pode por 30 para cada tawmanho e tipo) e área que mostre quantos pedidos foram feitos e quais estão "Sendo preparados", "Mandados" e "Entregues", tendo no pedido o que foi pedido, mas que ao passar o cursor por cima, mostre os pedidos, nome do cliente, endereço e observações. Uma coisa também muito essencial é a finalização dos pedidos, onde deve poder ser concluidos os pedidos feitos na página de delivery, pois quando faço o meu pedido e aperto o botão "Finalizar pedido", não ocorre nada. Quero que ao finalizar o pedido apareça a mensagem "Pedido finalizado e enviado para a Ramir's! Obrigado pela escolha de nossos serviços.".(feito - conta Admin criada automaticamente ao iniciar o servidor: usuário "Admin", senha "Ramir's@admin", email admin@ramirs.com, role admin; cadastros agora pedem Nome de usuário além do email; login aceita email OU nome de usuário; painel em admin.html com estatísticas Total/Sendo preparados/Mandados/Entregues, tooltip no hover dos pedidos mostrando itens, cliente, endereço e observações, seletor livre de status por pedido e estoque com 30 unidades por produto ajustável por +/-; corrigido o bug do botão "Finalizar pedido": pedido salvo no SQLite na hora com a mensagem exata pedida, envio à API externa em segundo plano com timeout)
 
 Fazer mudança nas fotos das bebidas, pegue urls e peça para a IA usa-los corretamente, para que seja mais prático do que apenas pedir para ela caçar
 
-teste por falha no commit
-
-adição de opções de sucos, sendo eles: Laranja, Uva, Abacaxi com hortelã, Manga, Acerola, Maracujá, Limão, Caju, Morango, Salada de Fruta, Jenipapo, Goiaba, Cajá, Açaí, Jaca. Adicionar opções de outros sabores de Fanta, sendo eles: Guaraná, Guaraná Zero, Laranja Zero e Caju. Adicionar opções de vitamina, sendo eles: banana, abacate, cacau, morango, mamão, Frutas vermelhas, Verde.
